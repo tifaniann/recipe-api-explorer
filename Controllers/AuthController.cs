@@ -21,7 +21,6 @@ namespace TheMealDBApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                return View(model);
                 if (model.Username == "admin" && model.Password == "password")
                 {
                     // Simulate successful login

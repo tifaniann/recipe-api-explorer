@@ -1,9 +1,10 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using TheMealDBApp.Filters;
 using TheMealDBApp.Models;
 
 namespace TheMealDBApp.Controllers;
-
+[AuthFilter]
 public class HomeController : Controller
 {
     public IActionResult Index()

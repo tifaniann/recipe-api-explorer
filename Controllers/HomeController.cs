@@ -9,7 +9,7 @@ public class HomeController : Controller
 {
     public IActionResult Index()
     {
-        return View();
+        return View(); // Views/{NamaController}/{NamaAction}.cshtml --> Views/Home/Index.cshtml
     }
 
     public IActionResult Privacy()

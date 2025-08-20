@@ -22,7 +22,7 @@ public class HomeController : Controller
             var content = await response.Content.ReadAsStringAsync(); // membaca response body sebagai string
             var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true }; //abaikan case-sensitivity
             var categoryResponse = JsonSerializer.Deserialize<CategoriesResponse>(content, options); //memetakan JSON ke object C# (di models/categories.cs)
-            return View(categoryResponse?.Categories);
+            return View(categoryResponse?.Categories); //mengirimkan data ke view, categories adalah model yang akan digunakan di Views/Home/Index.cshtml
         }
         else
         {

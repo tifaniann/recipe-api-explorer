@@ -1,6 +1,9 @@
+using TheMealDBApp.Controllers;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // 1. Tambahkan service sebelum builder.Build()
+builder.Services.AddHttpClient<HomeController>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddSession(options =>
 {

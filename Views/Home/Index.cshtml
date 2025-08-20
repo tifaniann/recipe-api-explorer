@@ -3,6 +3,36 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">List all meal categories</h1>
+    <p id= "clock"></p>
+    @* <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p> *@
+
+    <table border="1" class="table table-bordered table-striped mt-3" style="margin:auto; width:80%"> 
+        <thead>
+            <tr>
+                <th>Id Category</th>
+                <th>Str Category</th>
+                <th>Str Category Thumb</th>
+                <th>Str Category Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var category in Model)
+            {
+                <tr>
+                    <td>@category.IdCategory</td>
+                    <td>@category.StrCategory</td>
+                    <td><img src="@category.StrCategoryThumb" alt="@category.StrCategory" style="width: 100px; height: 100px;"></td>
+                    <td>@category.StrCategoryDescription</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
+
+<script>
+  setInterval(() => {
+    const now = new Date();
+    document.getElementById("clock").innerText = `WIB:` + (now.toLocaleTimeString());
+  }, 1000);
+</script>

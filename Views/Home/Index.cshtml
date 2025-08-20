@@ -7,7 +7,7 @@
     <p id= "clock"></p>
     @* <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p> *@
 
-    <table border="1" class="table table-bordered table-striped mt-3" style="margin:auto; width:80%"> 
+    <table id="mealTable"  class="table table-bordered table-striped mt-3" style="margin:auto; width:80%"> 
         <thead>
             <tr>
                 <th>Id Category</th>
@@ -30,9 +30,21 @@
     </table>
 </div>
 
-<script>
-  setInterval(() => {
-    const now = new Date();
-    document.getElementById("clock").innerText = `WIB:` + (now.toLocaleTimeString());
-  }, 1000);
-</script>
+@section Scripts {
+    <script>
+        setInterval(() => {
+            const now = new Date();
+            document.getElementById("clock").innerHTML =   `<img src="/images/schedule.png" style="width:20px; height:20px; vertical-align:middle;"> `  + (now.toLocaleTimeString());
+        }, 1000);
+
+        $(function() {
+            $('#mealTable').DataTable({
+                pageLength: 10,
+                lengthChange: false,
+                paging: true,
+                searching: true,
+                ordering: true
+            });
+        });
+    </script>
+}

@@ -1,8 +1,11 @@
+using Microsoft.EntityFrameworkCore;
 using TheMealDBApp.Controllers;
+using TheMealDBApp.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // 1. Tambahkan service sebelum builder.Build()
+builder.Services.AddControllers();
 builder.Services.AddHttpClient<HomeController>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddSession(options =>
@@ -11,6 +14,9 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
+
+builder.Services.AddDbContext<ApplicationDBContext>(options => // menambahkan DbContext ke dalam layanan (untuk database)
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 

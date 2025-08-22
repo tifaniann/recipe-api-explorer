@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TheMealDBApp.DTOs;
+using TheMealDBApp.Migrations;
 
 namespace TheMealDBApp.Interface
 {
     public interface ICartRepository
     {
-        Task<CreateCtrMealDto>? createMealAsync(CreateCtrMealDto createMealDto);
+        Task<Categories_Temp>? createMealAsync(Categories_Temp createMealDto);
     }
 }

@@ -16,7 +16,7 @@ namespace TheMealDBApp.Repository
             _context = context;
         }
 
-        public Task<CreateCtrMealDto>? createMealAsync(CreateCtrMealDto createMealDto)
+        public Task<Categories_Temp> createMealAsync(Categories_Temp createMealDto)
         {
             throw new NotImplementedException();
         }

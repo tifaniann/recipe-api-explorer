@@ -16,7 +16,14 @@ namespace TheMealDBApp.Data
         {
 
         }
-        
-        public DbSet<CreateCtrMealDto> Categories_Temp { get; set; }
+
+        public DbSet<Categories_Temp> Categories_Temp { get; set; }
+        public DbSet<Users> Users { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Categories_Temp>()
+                .HasKey(c => new { c.IdCust, c.IdCategory }); // Composite Key
+        }
     }
 }

@@ -11,8 +11,8 @@ using TheMealDBApp.Data;
 namespace TheMealDBApp.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20250821013743_temp_cat_migration")]
-    partial class temp_cat_migration
+    [Migration("20250822004950_categories_temp")]
+    partial class categories_temp
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,15 +24,21 @@ namespace TheMealDBApp.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("TheMealDBApp.DTOs.CreateCtrMealDto", b =>
+            modelBuilder.Entity("TheMealDBApp.DTOs.Categories_Temp", b =>
                 {
+                    b.Property<string>("IdCust")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("IdCategory")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("Jml")
+                        .HasColumnType("int");
 
                     b.Property<string>("StrCategory")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("IdCategory");
+                    b.HasKey("IdCust", "IdCategory");
 
                     b.ToTable("Categories_Temp");
                 });

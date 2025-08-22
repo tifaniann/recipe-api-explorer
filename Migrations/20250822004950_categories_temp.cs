@@ -5,7 +5,7 @@
 namespace TheMealDBApp.Migrations
 {
     /// <inheritdoc />
-    public partial class temp_cat_migration : Migration
+    public partial class categories_temp : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -14,12 +14,14 @@ namespace TheMealDBApp.Migrations
                 name: "Categories_Temp",
                 columns: table => new
                 {
+                    IdCust = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     IdCategory = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    StrCategory = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    StrCategory = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Jml = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Categories_Temp", x => x.IdCategory);
+                    table.PrimaryKey("PK_Categories_Temp", x => new { x.IdCust, x.IdCategory });
                 });
         }
 

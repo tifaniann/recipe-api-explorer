@@ -15,7 +15,8 @@
         <form asp-action="Login" method="post">
             <div class="mb-3">
                 <label class="form-label">Username</label>
-                <input asp-for="Username" class="form-control" />
+                <input asp-for="Username" class="form-control" /> 
+                @* input asp-for="Username" ('Username' namanya harus sama seperti yang dideclare di model)*@
                 <span asp-validation-for="Username" class="text-danger"></span>
             </div>
 

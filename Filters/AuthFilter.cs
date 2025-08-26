@@ -14,7 +14,7 @@ namespace TheMealDBApp.Filters
             var username = context.HttpContext.Session.GetString("Username");
             if (string.IsNullOrEmpty(username))
             {
-                // kalau belum login, redirect ke Auth/Login
+                // kalau belum login, redirect ke Auth/Login. RedirectToActionResult(action(nama fungsi), controller, routeValues(optional))
                 context.Result = new RedirectToActionResult("Login", "Auth", null);
             }
             base.OnActionExecuting(context);

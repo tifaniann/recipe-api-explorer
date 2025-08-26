@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TheMealDBApp.Data;
+using TheMealDBApp.Interface;
 using TheMealDBApp.Models;
 
 namespace TheMealDBApp.Controllers
@@ -11,9 +12,11 @@ namespace TheMealDBApp.Controllers
     public class AuthController : Controller
     {
         private readonly ApplicationDBContext _context;
-        public AuthController(ApplicationDBContext context)
+        private readonly IUserRepository _userRepo;
+        public AuthController(ApplicationDBContext context, IUserRepository userRepo)
         {
             _context = context;
+            _userRepo = userRepo;
         }
 
         [HttpGet]
@@ -24,27 +27,21 @@ namespace TheMealDBApp.Controllers
 
 
         [HttpPost]
-        public IActionResult Login(Users model)
+        public async Task <IActionResult> Login(Users model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var user = _context.Users.FirstOrDefault(u => u.Username == model.Username);
-                if (user != null)
-                {
-                    // Kalau password masih plain text
-                    if (user.Password == model.Password)
-                    {
-                        HttpContext.Session.SetString("Username", user.Username);
-                        return RedirectToAction("Index", "Home");
-                    }
-
-                    // Kalau sudah pakai hash (mis. BCrypt)
-                    // if (BCrypt.Net.BCrypt.Verify(model.Password, user.PasswordHash)) { ... }
-                }
-
-                ModelState.AddModelError("", "Invalid username or password.");
+                return View(model);
             }
 
+            var user = await _userRepo.LoginUserAsync(model);
+            if (user != null)
+            {
+                HttpContext.Session.SetString("Username", user.Username); // HttpContext.Session.SetString(key, value) untuk menyimpan data di session
+                return RedirectToAction("Index", "Home");
+            }
+
+            ModelState.AddModelError("", "Invalid username or password.");
             return View(model);
         }
 
@@ -55,29 +52,22 @@ namespace TheMealDBApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register(Users model)
+        public async Task<IActionResult> Register(Users model)
         {
-            if (ModelState.IsValid)
+            if (model == null)
             {
-                // Cek apakah username atau email sudah dipakai
-                var existingUser = _context.Users
-                    .FirstOrDefault(u => u.Username == model.Username || u.Email == model.Email);
-
-                if (existingUser != null)
-                {
-                    ModelState.AddModelError("", "Username atau Email sudah terdaftar.");
-                    return View(model);
-                }
-
-                // Simpan user baru ke database
-                _context.Users.Add(model);
-                _context.SaveChanges();
-
-                TempData["Message"] = "Akun berhasil dibuat. Silakan login!";
-                return RedirectToAction("Login");
+                return BadRequest("Data wajib diisi!");
             }
 
-            return View(model);
+            var result = await _userRepo.RegisterUserAsync(model);
+
+            if (result == null) // null bukan berarti data kosong, tapi berarti service kasih tanda gagal (karena sudah ada user sebelumnya
+            {
+                ModelState.AddModelError("", "Username atau Email sudah terdaftar."); 
+                return View(model); 
+            }
+            TempData["Message"] = "Akun berhasil dibuat. Silakan login!";
+            return RedirectToAction("Login");
         }
 
 

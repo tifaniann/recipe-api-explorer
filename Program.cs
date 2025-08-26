@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using TheMealDBApp.Controllers;
 using TheMealDBApp.Data;
+using TheMealDBApp.Interface;
+using TheMealDBApp.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +19,8 @@ builder.Services.AddSession(options =>
 
 builder.Services.AddDbContext<ApplicationDBContext>(options => // menambahkan DbContext ke dalam layanan (untuk database)
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 var app = builder.Build();
 

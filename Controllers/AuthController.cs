@@ -38,7 +38,7 @@ namespace TheMealDBApp.Controllers
             if (user != null)
             {
                 HttpContext.Session.SetString("Username", user.Username); // HttpContext.Session.SetString(key, value) untuk menyimpan data di session
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home"); // RedirectToAction("Action", "Controller")
             }
 
             ModelState.AddModelError("", "Invalid username or password.");

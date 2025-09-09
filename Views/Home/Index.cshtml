@@ -26,10 +26,10 @@
                     <td><img src="@category.StrCategoryThumb" alt="@category.StrCategory" style="width: 100px; height: 100px;"></td>
                     <td>@category.StrCategoryDescription</td>
                     <td>
-                        <form asp-controller="Cart" asp-action="AddToCart" method="post" onsubmit="return showSuccessMessage()">
+                        <form id="cartForm-@category.IdCategory" asp-controller="Cart" asp-action="AddToCart" method="post" onsubmit="return showSuccessMessage('@category.IdCategory')">
                             <input type="hidden" name="categoryId" value="@category.IdCategory" />
                             <button type="submit" style="border:none; background:none; padding:0; cursor:pointer;">
-                                <img src="/images/dishAdd.png" alt="Tambahkan Ke Order" title="Tambahkan" style="width:50px; height:50px;">
+                                <img src="/images/dishAdd.png" alt="Tambahkan Ke Order" title="Tambah Order" style="width:50px; height:50px;">
                             </button>
                         </form>
                     </td>
@@ -71,17 +71,18 @@
             });
         });
 
-        function showSuccessMessage() {
-            // tampilkan notifikasi
+        function showSuccessMessage(categoryId) {
             const msg = document.getElementById("successMessage");
             msg.style.display = "flex";
 
-            // sembunyikan setelah 3 detik
+            // kasih waktu tampil dulu (misalnya 1.5 detik)
             setTimeout(() => {
-                msg.style.display = "none";
-            }, 120000);
+                // submit form setelah notifikasi muncul
+                document.getElementById("cartForm-" + categoryId).submit();
+            }, 1500);
 
-            return true; // tetap lanjut submit ke controller
-        }
+            return false; // cegah submit langsung
+}
+
     </script>
 }

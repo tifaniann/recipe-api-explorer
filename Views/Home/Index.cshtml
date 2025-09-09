@@ -18,7 +18,8 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var category in Model)
+            @foreach (var category in Model) 
+            @* "in Model >> lihat di homecontroller, action index" *@
             {
                 <tr>
                     <td>@category.IdCategory</td>

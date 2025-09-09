@@ -33,7 +33,6 @@
                             </button>
                         </form>
                     </td>
-
                 </tr>
             }
         </tbody>
@@ -75,14 +74,14 @@
             const msg = document.getElementById("successMessage");
             msg.style.display = "flex";
 
-            // kasih waktu tampil dulu (misalnya 1.5 detik)
+            // kasih waktu tampil dulu (1.5 detik)
             setTimeout(() => {
                 // submit form setelah notifikasi muncul
                 document.getElementById("cartForm-" + categoryId).submit();
             }, 1500);
 
-            return false; // cegah submit langsung
-}
+            return false;
+        }
 
     </script>
 }

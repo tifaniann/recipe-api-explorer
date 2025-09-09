@@ -9,6 +9,7 @@ namespace TheMealDBApp.Interface
 {
     public interface ICartRepository
     {
-        Task<Categories_Temp>? createMealAsync(Categories_Temp createMealDto);
+        Task<Categories_Temp_DTO>? createMealAsync(Categories_Temp_DTO createMealDto);
+        Task<List<Categories_Temp_DTO>>? getAllMealsAsync();
     }
 }

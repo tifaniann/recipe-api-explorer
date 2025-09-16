@@ -13,5 +13,6 @@ namespace TheMealDBApp.Models
         public int IdCategory { get; set; }
         public string? StrCategory { get; set; }
         public int? Jml { get; set; }
+        public Orders Order { get; set; }
     }
 }

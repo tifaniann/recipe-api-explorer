@@ -12,5 +12,6 @@ namespace TheMealDBApp.Models
         public int IDcust { get; set; }
         public DateTime OrderDate { get; set; }
         public string? Status { get; set; }
+        public List<OrdersDetail> OrderDetails { get; set; }
     }
 }

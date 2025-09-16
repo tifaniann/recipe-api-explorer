@@ -26,6 +26,20 @@ namespace TheMealDBApp.Data
         {
             modelBuilder.Entity<Categories_Temp>()
                 .HasKey(c => new { c.IdCust, c.IdCategory }); // Composite Key
+
+            modelBuilder.Entity<Orders>()
+                .HasKey(o => o.OrderID); // Primary Key
+
+            modelBuilder.Entity<OrdersDetail>()
+                .HasKey(od => od.OrderDetailID); // Primary Key
+
+            modelBuilder.Entity<Orders>()
+                .HasMany(o => o.OrderDetails)      
+                .WithOne(od => od.Order)            
+                .HasForeignKey(od => od.OrderID); 
+
+            
+
         }
     }
 }

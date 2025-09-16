@@ -5,7 +5,7 @@ using TheMealDBApp.Filters;
 using TheMealDBApp.Models;
 
 namespace TheMealDBApp.Controllers;
-[AuthFilter]
+[AuthFilter] // filter untuk mengecek apakah user sudah login atau belum
 public class HomeController : Controller
 {
     private readonly HttpClient _httpClient;

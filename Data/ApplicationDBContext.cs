@@ -18,6 +18,8 @@ namespace TheMealDBApp.Data
         }
 
         public DbSet<Categories_Temp> Categories_Temp { get; set; }
+        public DbSet<Orders> Orders { get; set; }
+        public DbSet<OrdersDetail> OrdersDetail { get; set; }
         public DbSet<Users> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

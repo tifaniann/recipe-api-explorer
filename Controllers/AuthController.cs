@@ -37,6 +37,7 @@ namespace TheMealDBApp.Controllers
             var user = await _userRepo.LoginUserAsync(model);
             if (user != null)
             {
+                HttpContext.Session.SetInt32("IdCust", user.Id); 
                 HttpContext.Session.SetString("Username", user.Username); // HttpContext.Session.SetString(key, value) untuk menyimpan data di session
                 return RedirectToAction("Index", "Home"); // RedirectToAction("Action", "Controller")
             }

@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using TheMealDBApp.Models;
 using TheMealDBApp.DTOs;
+using TheMealDBApp.Migrations;
 
 namespace TheMealDBApp.Data
 {
@@ -38,8 +39,10 @@ namespace TheMealDBApp.Data
                 .WithOne(od => od.Order)            
                 .HasForeignKey(od => od.OrderID); 
 
-            
-
+            modelBuilder.Entity<Categories_Temp>()
+                .HasOne(c => c.Users)               // tiap Category_Temp punya satu User
+                .WithMany(u => u.Categories_Temps)       // tiap User bisa punya banyak Category_Temp
+                .HasForeignKey(c => c.IdCust); 
         }
     }
 }

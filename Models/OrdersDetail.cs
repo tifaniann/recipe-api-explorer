@@ -13,6 +13,6 @@ namespace TheMealDBApp.Models
         public int IdCategory { get; set; }
         public string? StrCategory { get; set; }
         public int? Jml { get; set; }
-        public Orders Order { get; set; }
+        public Orders? Order { get; set; } // Navigation property. Many order details belong to 1 order
     }
 }

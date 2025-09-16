@@ -12,6 +12,6 @@ namespace TheMealDBApp.Models
         public int IDcust { get; set; }
         public DateTime OrderDate { get; set; }
         public string? Status { get; set; }
-        public List<OrdersDetail> OrderDetails { get; set; }
+        public List<OrdersDetail>? OrderDetails { get; set; } // Navigation property. 1 order has many order details
     }
 }

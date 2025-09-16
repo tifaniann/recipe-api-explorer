@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using TheMealDBApp.Data;
 using TheMealDBApp.DTOs;
 using TheMealDBApp.Interface;
@@ -17,14 +18,61 @@ namespace TheMealDBApp.Repository
             _context = context;
         }
 
-        public Task<Categories_Temp>? addToCartAsync(Categories_Temp itemAdd)
+        public async Task<Categories_Temp> addToCartAsync(Categories_Temp itemAdd)
         {
-            throw new NotImplementedException();
+            var exist = await _context.Categories_Temp.FirstOrDefaultAsync(c => c.IdCust == itemAdd.IdCust && c.IdCategory == itemAdd.IdCategory);
+            if (exist != null)
+            {
+                exist.Jml += itemAdd.Jml;
+                _context.Categories_Temp.Update(exist);
+            }
+            else
+            {
+                await _context.Categories_Temp.AddAsync(itemAdd);
+            }
+            await _context.SaveChangesAsync();
+            return itemAdd;
         }
 
-        public Task<Categories_Temp>? ClearCarttAsync(int idCust)
+        public async Task<Categories_Temp> ClearCarttAsync(int idCust)
         {
-            throw new NotImplementedException();
+            var cartItems = await _context.Categories_Temp.Where(c => c.IdCust == idCust).ToListAsync();
+
+            if (cartItems == null || !cartItems.Any())
+                throw new Exception("Keranjang kosong.");
+            
+            // 1. Buat order baru
+            var order = new Orders
+            {
+                IDcust = idCust,
+                OrderDate = DateTime.Now,
+                Status = "Pending"
+            };
+
+            _context.Orders.Add(order);
+            await _context.SaveChangesAsync(); // simpan dulu biar dapat OrderID
+
+            // 2. Insert detail
+            foreach (var item in cartItems)
+            {
+                var detail = new OrdersDetail
+                {
+                    OrderID = order.OrderID,  
+                    IdCategory = int.Parse(item.IdCategory),
+                    StrCategory = item.StrCategory,
+                    Jml = item.Jml ?? 1
+                };
+                _context.OrdersDetail.Add(detail);
+            }
+
+            // 3. Simpan detail
+            await _context.SaveChangesAsync();
+
+            // 4. Clear cart
+            _context.Categories_Temp.RemoveRange(cartItems);
+            await _context.SaveChangesAsync();
+
+            return cartItems.Last();
         }
 
         public Task<Categories_Temp>? createMealAsync(Categories_Temp createMealDto)
@@ -37,14 +85,21 @@ namespace TheMealDBApp.Repository
             throw new NotImplementedException();
         }
 
-        public async Task<List<Categories_Temp>>? GetCartAsync(int idCust)
+        public async Task<List<Categories_Temp>> GetCartAsync(int idCust)
         {
-            throw new NotImplementedException();
+            return await _context.Categories_Temp.Where(c => c.IdCust == idCust).ToListAsync();
         }
 
-        public Task<Categories_Temp>? UpdateQtyAsync(int idCust, int idCategory, int qty)
+        public async Task<Categories_Temp> UpdateQtyAsync(int idCust, string idCategory, int qty)
         {
-            throw new NotImplementedException();
+            var cartItem = await _context.Categories_Temp.FirstOrDefaultAsync(c => c.IdCust == idCust && c.IdCategory == idCategory);
+            if (cartItem != null)
+            {
+                cartItem.Jml = qty;
+                _context.Categories_Temp.Update(cartItem);
+                await _context.SaveChangesAsync();
+            }
+            return cartItem;
         }
     }
 }

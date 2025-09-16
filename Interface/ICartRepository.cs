@@ -14,7 +14,7 @@ namespace TheMealDBApp.Interface
         Task<List<Categories_Temp>>? getAllMealsAsync();
         Task<List<Categories_Temp>>? GetCartAsync(int idCust);
         Task<Categories_Temp>? addToCartAsync(Categories_Temp itemAdd);
-        Task<Categories_Temp>? UpdateQtyAsync(int idCust, int idCategory, int qty);
+        Task<Categories_Temp>? UpdateQtyAsync(int idCust, string idCategory, int qty);
         Task<Categories_Temp>? ClearCarttAsync(int idCust);
     }
 }

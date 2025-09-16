@@ -12,8 +12,8 @@ using TheMealDBApp.Data;
 namespace TheMealDBApp.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20250916030501_AddOrdernOrdersdetail")]
-    partial class AddOrdernOrdersdetail
+    [Migration("20250916092748_addmigrationtable")]
+    partial class addmigrationtable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,17 +27,17 @@ namespace TheMealDBApp.Migrations
 
             modelBuilder.Entity("TheMealDBApp.Models.Categories_Temp", b =>
                 {
-                    b.Property<string>("IdCust")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("IdCust")
+                        .HasColumnType("int");
 
-                    b.Property<string>("IdCategory")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("IdCategory")
+                        .HasColumnType("int");
 
                     b.Property<int?>("Jml")
                         .HasColumnType("int");
 
                     b.Property<string>("StrCategory")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("int");
 
                     b.HasKey("IdCust", "IdCategory");
 
@@ -120,6 +120,17 @@ namespace TheMealDBApp.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("TheMealDBApp.Models.Categories_Temp", b =>
+                {
+                    b.HasOne("TheMealDBApp.Models.Users", "Users")
+                        .WithMany("Categories_Temps")
+                        .HasForeignKey("IdCust")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Users");
+                });
+
             modelBuilder.Entity("TheMealDBApp.Models.OrdersDetail", b =>
                 {
                     b.HasOne("TheMealDBApp.Models.Orders", "Order")
@@ -134,6 +145,11 @@ namespace TheMealDBApp.Migrations
             modelBuilder.Entity("TheMealDBApp.Models.Orders", b =>
                 {
                     b.Navigation("OrderDetails");
+                });
+
+            modelBuilder.Entity("TheMealDBApp.Models.Users", b =>
+                {
+                    b.Navigation("Categories_Temps");
                 });
 #pragma warning restore 612, 618
         }

@@ -8,7 +8,7 @@ namespace TheMealDBApp.Models
         public class Categories_Temp
         {
             public int? IdCust { get; set; }
-            public string? IdCategory { get; set; }
+            public int IdCategory { get; set; }
             public string? StrCategory { get; set; }
             public int? Jml { get; set; }
             public Users? Users { get; set; } 

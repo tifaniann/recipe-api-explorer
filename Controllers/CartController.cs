@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using TheMealDBApp.Data;
 using TheMealDBApp.Filters;
 using TheMealDBApp.Interface;
-using TheMealDBApp.Migrations;
+// using TheMealDBApp.Migrations;
 using TheMealDBApp.Models;
 
 namespace TheMealDBApp.Controllers
@@ -37,7 +37,7 @@ namespace TheMealDBApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddToCart(string idCategory, string strCategory, int qty = 1)
+        public async Task<IActionResult> AddToCart(int idCategory, string strCategory, int qty = 1)
         {
             var idCust = HttpContext.Session.GetInt32("IdCust");
             if (idCust == null)
@@ -53,37 +53,37 @@ namespace TheMealDBApp.Controllers
                 Jml = qty
             });
 
-            return RedirectToAction("Index");
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> UpdateQty(string idCategory, int qty)
-        {
-            var idCust = HttpContext.Session.GetInt32("IdCust");
-            if (idCust == null)
-            {
-                return RedirectToAction("Login", "Auth");
-            }
-
-            await _cartRepo.UpdateQtyAsync(idCust.Value, idCategory, qty);
-
-            return RedirectToAction("Index");
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Checkout()
-        {
-            var idCust = HttpContext.Session.GetInt32("IdCust");
-            if (idCust == null)
-            {
-                return RedirectToAction("Login", "Auth");
-            }
-
-            // panggil ClearCarttAsync
-            var result = await _cartRepo.ClearCarttAsync(idCust.Value);
-
             return RedirectToAction("Index", "Home");
         }
+
+        // [HttpPost]
+        // public async Task<IActionResult> UpdateQty(string idCategory, int qty)
+        // {
+        //     var idCust = HttpContext.Session.GetInt32("IdCust");
+        //     if (idCust == null)
+        //     {
+        //         return RedirectToAction("Login", "Auth");
+        //     }
+
+        //     await _cartRepo.UpdateQtyAsync(idCust.Value, idCategory, qty);
+
+        //     return RedirectToAction("Index");
+        // }
+
+        // [HttpPost]
+        // public async Task<IActionResult> Checkout()
+        // {
+        //     var idCust = HttpContext.Session.GetInt32("IdCust");
+        //     if (idCust == null)
+        //     {
+        //         return RedirectToAction("Login", "Auth");
+        //     }
+
+        //     // panggil ClearCarttAsync
+        //     var result = await _cartRepo.ClearCarttAsync(idCust.Value);
+
+        //     return RedirectToAction("Index", "Home");
+        // }
 
     }
 }

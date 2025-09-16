@@ -58,7 +58,7 @@ namespace TheMealDBApp.Repository
                 var detail = new OrdersDetail
                 {
                     OrderID = order.OrderID,  
-                    IdCategory = int.Parse(item.IdCategory),
+                    IdCategory = item.IdCategory,
                     StrCategory = item.StrCategory,
                     Jml = item.Jml ?? 1
                 };
@@ -90,7 +90,7 @@ namespace TheMealDBApp.Repository
             return await _context.Categories_Temp.Where(c => c.IdCust == idCust).ToListAsync();
         }
 
-        public async Task<Categories_Temp> UpdateQtyAsync(int idCust, string idCategory, int qty)
+        public async Task<Categories_Temp> UpdateQtyAsync(int idCust, int idCategory, int qty)
         {
             var cartItem = await _context.Categories_Temp.FirstOrDefaultAsync(c => c.IdCust == idCust && c.IdCategory == idCategory);
             if (cartItem != null)

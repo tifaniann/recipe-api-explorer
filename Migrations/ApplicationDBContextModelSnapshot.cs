@@ -27,14 +27,14 @@ namespace TheMealDBApp.Migrations
                     b.Property<int>("IdCust")
                         .HasColumnType("int");
 
-                    b.Property<string>("IdCategory")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("IdCategory")
+                        .HasColumnType("int");
 
                     b.Property<int?>("Jml")
                         .HasColumnType("int");
 
                     b.Property<string>("StrCategory")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("int");
 
                     b.HasKey("IdCust", "IdCategory");
 

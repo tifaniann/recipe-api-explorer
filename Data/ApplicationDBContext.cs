@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using TheMealDBApp.Models;
 using TheMealDBApp.DTOs;
-using TheMealDBApp.Migrations;
+// using TheMealDBApp.Migrations;
 
 namespace TheMealDBApp.Data
 {

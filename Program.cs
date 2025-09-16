@@ -21,6 +21,7 @@ builder.Services.AddDbContext<ApplicationDBContext>(options => // menambahkan Db
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ICartRepository, CartRepository>();
 
 var app = builder.Build();
 

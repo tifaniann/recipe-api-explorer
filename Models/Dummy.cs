@@ -17,7 +17,7 @@ namespace TheMealDBApp.Models
         [MaxLength(50)]
         public string Password { get; set; } = string.Empty;
 
-        [MaxLength(50)]
+        [MaxLength(100)]
         public string? Email { get; set; }
         public int status { get; set; }
     }

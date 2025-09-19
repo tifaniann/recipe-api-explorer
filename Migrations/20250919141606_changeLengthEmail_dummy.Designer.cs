@@ -12,8 +12,8 @@ using TheMealDBApp.Data;
 namespace TheMealDBApp.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20250919115433_InitDummy")]
-    partial class InitDummy
+    [Migration("20250919141606_changeLengthEmail_dummy")]
+    partial class changeLengthEmail_dummy
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -52,9 +52,17 @@ namespace TheMealDBApp.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("nama_user"));
 
+                    b.Property<string>("Email")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("status")
+                        .HasColumnType("int");
 
                     b.HasKey("nama_user");
 

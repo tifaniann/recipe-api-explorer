@@ -37,7 +37,7 @@ namespace TheMealDBApp.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("StrCategory")
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdCust", "IdCategory");
 

@@ -24,10 +24,13 @@ namespace TheMealDBApp.Migrations
 
             modelBuilder.Entity("TheMealDBApp.Models.Categories_Temp", b =>
                 {
-                    b.Property<int>("IdCust")
+                    b.Property<int>("IdCategory")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("IdCategory")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdCategory"));
+
+                    b.Property<int?>("IdCust")
                         .HasColumnType("int");
 
                     b.Property<int?>("Jml")
@@ -36,7 +39,9 @@ namespace TheMealDBApp.Migrations
                     b.Property<string>("StrCategory")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("IdCust", "IdCategory");
+                    b.HasKey("IdCategory");
+
+                    b.HasIndex("IdCust");
 
                     b.ToTable("Categories_Temp");
                 });
@@ -146,9 +151,7 @@ namespace TheMealDBApp.Migrations
                 {
                     b.HasOne("TheMealDBApp.Models.Users", "Users")
                         .WithMany("Categories_Temps")
-                        .HasForeignKey("IdCust")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("IdCust");
 
                     b.Navigation("Users");
                 });

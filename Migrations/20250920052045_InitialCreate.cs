@@ -6,11 +6,26 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TheMealDBApp.Migrations
 {
     /// <inheritdoc />
-    public partial class addmigrationtable : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "dummys",
+                columns: table => new
+                {
+                    nama_user = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Password = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    status = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_dummys", x => x.nama_user);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Orders",
                 columns: table => new
@@ -67,21 +82,26 @@ namespace TheMealDBApp.Migrations
                 name: "Categories_Temp",
                 columns: table => new
                 {
-                    IdCust = table.Column<int>(type: "int", nullable: false),
-                    IdCategory = table.Column<int>(type: "int", nullable: false),
+                    IdCategory = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IdCust = table.Column<int>(type: "int", nullable: true),
                     StrCategory = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Jml = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Categories_Temp", x => new { x.IdCust, x.IdCategory });
+                    table.PrimaryKey("PK_Categories_Temp", x => x.IdCategory);
                     table.ForeignKey(
                         name: "FK_Categories_Temp_Users_IdCust",
                         column: x => x.IdCust,
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Categories_Temp_IdCust",
+                table: "Categories_Temp",
+                column: "IdCust");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrdersDetail_OrderID",
@@ -94,6 +114,9 @@ namespace TheMealDBApp.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Categories_Temp");
+
+            migrationBuilder.DropTable(
+                name: "dummys");
 
             migrationBuilder.DropTable(
                 name: "OrdersDetail");

@@ -34,8 +34,11 @@ namespace TheMealDBApp.Data
                 entity.Property(e => e.nama_user).ValueGeneratedOnAdd(); //auto increment
             });
 
-            modelBuilder.Entity<Categories_Temp>()
-                .HasKey(c => new { c.IdCust, c.IdCategory }); // Composite Key
+            modelBuilder.Entity<Categories_Temp>(entity =>
+            {
+                entity.HasKey(c => c.IdCategory); //primary key
+                entity.Property(c => c.IdCategory).ValueGeneratedOnAdd(); //auto increment
+            });
 
             modelBuilder.Entity<Orders>()
                 .HasKey(o => o.OrderID); // Primary Key

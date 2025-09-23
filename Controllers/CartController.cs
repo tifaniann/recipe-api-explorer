@@ -90,13 +90,15 @@ namespace TheMealDBApp.Controllers
         // }
 
         [HttpPost("Cart/CheckoutPdf")]
-        public IActionResult CheckoutPdf()
+        public async Task<IActionResult> CheckoutPdf()
         {
             var custId = HttpContext.Session.GetInt32("IdCust") ?? 0;
             var orders = _cartRepo.GetCartAsync(custId);
 
             var pdfBytes = GeneratePdf(orders); // sementara blank
+            var result = await _cartRepo.ClearCarttAsync(custId);
             return File(pdfBytes, "application/pdf", "Order.pdf");
+            return RedirectToAction("Index", "Home");
         }
 
         private byte[] GeneratePdf(Task<List<Categories_Temp>>? orders)

@@ -52,17 +52,22 @@
             }
         </tbody>
     </table>
-    <form asp-action="CheckoutPdf" asp-controller="Cart" method="post" style="text-align:right; margin-top:10px;">
+    <form id="FormCO-@Context.Session.GetInt32("IdCust")" 
+        asp-action="CheckoutPdf" 
+        asp-controller="Cart" 
+        method="post" 
+        onsubmit="return confirmAndOpenPdf('@Context.Session.GetInt32("IdCust")');"
+        style="text-align:right; margin-top:10px;">
         <div style="text-align: right; margin-top:10px;">
             <button type="submit" 
                     style="border: none; background-color: #007bff; color: white; 
                         padding: 8px 16px; border-radius: 6px; cursor: pointer; 
-                        font-size: 14px; font-weight: 600;"
-                    onclick="return confirmAndOpenPdf(this)">
+                        font-size: 14px; font-weight: 600;">
                 Order
             </button>
         </div>
     </form>
+
     <div id="successMessage" 
         style="display:none; 
                 position:fixed; 
@@ -81,15 +86,14 @@
 
 @section Scripts {
     <script>
-        function confirmAndOpenPdf(button) {
+        function confirmAndOpenPdf(idcust) {
             const msg = document.getElementById("successMessage");
             msg.style.display = "flex";
 
             // submit form setelah delay
             setTimeout(() => {
                 // button.closest('form') untuk submit form yang diklik
-                button.closest('form').submit();
-                msg.style.display = "none";
+                document.getElementById("FormCO-" + idcust).submit();
             }, 2500);
 
             return false; // hentikan submit default dulu

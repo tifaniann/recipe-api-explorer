@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Order Cart";
+}
+<h1>@ViewData["Title"]</h1>
+
+<div class="text-center">
+
+    <table id="CartTable"  class="table table-bordered table-striped mt-3" style="margin:auto; width:80%"> 
+        <thead>
+            <tr>
+                <th>Str Category</th>
+                <th>Str Category Thumb</th>
+                <th>Jumlah</th>
+            </tr>
+        </thead>
+        <tbody>
+           @foreach (var Order in Model) 
+            @* "in Model" >> lihat di homecontroller, action index *@
+            {
+                <tr>
+                    
+                        <td>@Order.StrCategory</td>
+                        <td><img src="@Order.StrCategoryThumb" alt="@Order.StrCategory" style="width: 100px; height: 100px;"></td>
+                        <td>@Order.Jml</td>
+                        @* <td>
+                            <input type="hidden" name="idCategory" value="@Order.IdCategory" />
+                            <input type="hidden" name="strCategory" value="@Order.StrCategory" />
+                            <input type="hidden" name="StrCategoryThumb" value="@Order.StrCategoryThumb" />
+                            <button type="submit" style="border:none; background:none; padding:0; cursor:pointer;">
+                                <img src="/images/dishAdd.png" alt="Tambahkan Ke Order" title="Tambah Order" style="width:50px; height:50px;">
+                            </button>
+                        </td> *@
+                    
+                </tr>
+            }
+        </tbody>
+    </table>
+    
+</div>
+<button type="submit" style="border:none; background:none; padding:0; cursor:pointer;">
+    <img src="/images/dishAdd.png" alt="Tambahkan Ke Order" title="Tambah Order" style="width:50px; height:50px;">
+</button>

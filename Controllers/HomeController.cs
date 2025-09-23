@@ -1,6 +1,8 @@
 using System.Diagnostics;
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using TheMealDBApp.Data;
 using TheMealDBApp.Filters;
 using TheMealDBApp.Models;
 
@@ -9,9 +11,11 @@ namespace TheMealDBApp.Controllers;
 public class HomeController : Controller
 {
     private readonly HttpClient _httpClient;
-    public HomeController(HttpClient httpClient)
+    private readonly ApplicationDBContext _context;
+    public HomeController(HttpClient httpClient, ApplicationDBContext context)
     {
         _httpClient = httpClient;
+        _context = context;
     }
     public async Task<IActionResult> Index() // Home/Index.cshtml (nama action(fungsi) harus sama dengan nama file .cshtml dan nama folder harus sama dengan nama controller)
     {
@@ -33,6 +37,17 @@ public class HomeController : Controller
     public IActionResult Privacy()
     {
         return View();
+    }
+
+    public async Task<IActionResult> Order()
+    {
+        var idCust = HttpContext.Session.GetInt32("IdCust");
+        if (idCust == null)
+        {
+            return RedirectToAction("Login", "Auth");
+        }
+        var orderList = await _context.Categories_Temp.Where(c => c.IdCust == idCust).ToListAsync();
+        return View(orderList);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

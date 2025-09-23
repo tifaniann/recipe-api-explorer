@@ -9,8 +9,12 @@ namespace TheMealDBApp.Models
     {
         public int ID { get; set; }
         public int IdCategory { get; set; }
+        public string? StrCategory { get; set; }
+        public string? StrCategoryThumb { get; set; }
         public int? IdCust { get; set; }
         public int? Jml { get; set; }
-        public Users? Users { get; set; } 
+        public Users? Users { get; set; }
     }
+    
+
 }

@@ -37,7 +37,7 @@ namespace TheMealDBApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddToCart(int idCategory, string strCategory, int qty = 1)
+        public async Task<IActionResult> AddToCart(int idCategory, string strCategory, string StrCategoryThumb, int qty = 1)
         {
             var idCust = HttpContext.Session.GetInt32("IdCust");
             if (idCust == null)
@@ -49,10 +49,12 @@ namespace TheMealDBApp.Controllers
             {
                 IdCust = idCust.Value,
                 IdCategory = idCategory,
+                StrCategory = strCategory,
+                StrCategoryThumb = StrCategoryThumb,
                 Jml = qty
             });
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Order", "Home");
         }
 
         // [HttpPost]

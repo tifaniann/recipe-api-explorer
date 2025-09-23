@@ -8,6 +8,9 @@ using TheMealDBApp.Filters;
 using TheMealDBApp.Interface;
 // using TheMealDBApp.Migrations;
 using TheMealDBApp.Models;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System.IO;
 
 namespace TheMealDBApp.Controllers
 {
@@ -85,6 +88,48 @@ namespace TheMealDBApp.Controllers
 
         //     return RedirectToAction("Index", "Home");
         // }
+
+        [HttpPost("Cart/CheckoutPdf")]
+        public IActionResult CheckoutPdf()
+        {
+            var custId = HttpContext.Session.GetInt32("IdCust") ?? 0;
+            var orders = _cartRepo.GetCartAsync(custId);
+
+            var pdfBytes = GeneratePdf(orders); // sementara blank
+            return File(pdfBytes, "application/pdf", "Order.pdf");
+        }
+
+        private byte[] GeneratePdf(Task<List<Categories_Temp>>? orders)
+        {
+            using (var ms = new MemoryStream()) // MemoryStream berguna untuk return PDF langsung tanpa membuat file sementara
+            {
+                // Buat dokumen A4
+                var doc = new Document(PageSize.A4);
+                PdfWriter writer = PdfWriter.GetInstance(doc, ms);
+                doc.Open();
+
+                // Tambahkan watermark
+                PdfContentByte cb = writer.DirectContentUnder; // declare variable penyimpan kanvas
+                // Atur opacity (transparansi)
+                PdfGState gState = new PdfGState();
+                gState.FillOpacity = 0.2f; // 0.0 = transparan total, 1.0 = solid
+                cb.SetGState(gState);
+                BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+                cb.BeginText();
+                cb.SetColorFill(BaseColor.LIGHT_GRAY);
+                cb.SetFontAndSize(bf, 50);
+                cb.ShowTextAligned(Element.ALIGN_CENTER, "Nama Toko", 300, 450, 45); // x,y dan rotasi(atur kemiringan)
+                cb.EndText();
+
+                // Tambahkan tanggal dan jam
+                var now = DateTime.Now;
+                doc.Add(new Paragraph($"Hari/Tanggal: {now:dd-MM-yyyy}"));
+                doc.Add(new Paragraph($"Jam: {now:HH:mm}"));
+
+                doc.Close();
+                return ms.ToArray();
+            }
+        }
 
     }
 }

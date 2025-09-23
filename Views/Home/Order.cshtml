@@ -52,8 +52,49 @@
             }
         </tbody>
     </table>
-    
+    <form asp-action="CheckoutPdf" asp-controller="Cart" method="post" style="text-align:right; margin-top:10px;">
+        <div style="text-align: right; margin-top:10px;">
+            <button type="submit" 
+                    style="border: none; background-color: #007bff; color: white; 
+                        padding: 8px 16px; border-radius: 6px; cursor: pointer; 
+                        font-size: 14px; font-weight: 600;"
+                    onclick="return confirmAndOpenPdf(this)">
+                Order
+            </button>
+        </div>
+    </form>
+    <div id="successMessage" 
+        style="display:none; 
+                position:fixed; 
+                top:50%; left:50%; 
+                transform:translate(-50%, -50%); 
+                background:rgba(17, 130, 178, 0.7); 
+                color:white; 
+                font-size:20px; 
+                font-weight:bold;
+                padding:20px; 
+                border-radius:10px; 
+                z-index:9999;">
+        Order berhasil dibuat. Silahkan melakukan pembayaran di kasir
+    </div>
 </div>
-<button type="submit" style="border:none; background:none; padding:0; cursor:pointer;">
-    <img src="/images/dishAdd.png" alt="Tambahkan Ke Order" title="Tambah Order" style="width:50px; height:50px;">
-</button>
+
+@section Scripts {
+    <script>
+        function confirmAndOpenPdf(button) {
+            const msg = document.getElementById("successMessage");
+            msg.style.display = "flex";
+
+            // submit form setelah delay
+            setTimeout(() => {
+                // button.closest('form') untuk submit form yang diklik
+                button.closest('form').submit();
+                msg.style.display = "none";
+            }, 2500);
+
+            return false; // hentikan submit default dulu
+        }
+
+    </script>
+}
+

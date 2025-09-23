@@ -94,8 +94,15 @@ namespace TheMealDBApp.Repository
             var cartItem = await _context.Categories_Temp.FirstOrDefaultAsync(c => c.IdCust == idCust && c.IdCategory == idCategory);
             if (cartItem != null)
             {
-                cartItem.Jml = qty;
-                _context.Categories_Temp.Update(cartItem);
+                if (qty <= 0)
+                {
+                    _context.Categories_Temp.Remove(cartItem);
+                }
+                else
+                {
+                    cartItem.Jml = qty;
+                    _context.Categories_Temp.Update(cartItem);
+                }
                 await _context.SaveChangesAsync();
             }
             return cartItem;

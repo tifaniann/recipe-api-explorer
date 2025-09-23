@@ -57,19 +57,19 @@ namespace TheMealDBApp.Controllers
             return RedirectToAction("Order", "Home");
         }
 
-        // [HttpPost]
-        // public async Task<IActionResult> UpdateQty(int idCategory, int qty)
-        // {
-        //     var idCust = HttpContext.Session.GetInt32("IdCust");
-        //     if (idCust == null)
-        //     {
-        //         return RedirectToAction("Login", "Auth");
-        //     }
+        [HttpPost("UpdateQty/{idCategory}")]
+        public async Task<IActionResult> UpdateQty(int idCategory, [FromForm] int qty)
+        {
+            var idCust = HttpContext.Session.GetInt32("IdCust");
+            if (idCust == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
 
-        //     await _cartRepo.UpdateQtyAsync(idCust.Value, idCategory, qty);
+            await _cartRepo.UpdateQtyAsync(idCust.Value, idCategory, qty);
 
-        //     return RedirectToAction("Index");
-        // }
+            return RedirectToAction("Order", "Home");
+        }
 
         // [HttpPost]
         // public async Task<IActionResult> Checkout()

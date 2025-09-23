@@ -11,6 +11,7 @@
                 <th>Str Category</th>
                 <th>Str Category Thumb</th>
                 <th>Jumlah</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -19,18 +20,34 @@
             {
                 <tr>
                     
-                        <td>@Order.StrCategory</td>
-                        <td><img src="@Order.StrCategoryThumb" alt="@Order.StrCategory" style="width: 100px; height: 100px;"></td>
-                        <td>@Order.Jml</td>
-                        @* <td>
-                            <input type="hidden" name="idCategory" value="@Order.IdCategory" />
-                            <input type="hidden" name="strCategory" value="@Order.StrCategory" />
-                            <input type="hidden" name="StrCategoryThumb" value="@Order.StrCategoryThumb" />
-                            <button type="submit" style="border:none; background:none; padding:0; cursor:pointer;">
-                                <img src="/images/dishAdd.png" alt="Tambahkan Ke Order" title="Tambah Order" style="width:50px; height:50px;">
+                    <td>@Order.StrCategory</td>
+                    <td><img src="@Order.StrCategoryThumb" alt="@Order.StrCategory" style="width: 100px; height: 100px;"></td>
+                    <td>@Order.Jml</td>
+                    <td>
+                        <!-- kurangi -->
+                        <form asp-action="UpdateQty" asp-controller="Cart" asp-route-idCategory="@Order.IdCategory" method="post" style="display:inline;">
+                            <input type="hidden" name="qty" value="@(Order.Jml > 1 ? Order.Jml - 1 : 0)" />
+                            <button type="submit" class="btn btn-sm btn-warning" title="Kurangi Order">
+                                <i class="fas fa-minus"></i>
                             </button>
-                        </td> *@
-                    
+                        </form>
+
+                        <!-- add -->
+                        <form asp-action="UpdateQty" asp-controller="Cart" asp-route-idCategory="@Order.IdCategory" method="post" style="display:inline;">
+                            <input type="hidden" name="qty" value="@(Order.Jml + 1)" />
+                            <button type="submit" class="btn btn-sm btn-success" title="Tambah Order">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </form>
+
+                        <!-- hapus -->
+                        <form asp-action="UpdateQty" asp-controller="Cart" asp-route-idCategory="@Order.IdCategory" method="post" style="display:inline;">
+                            <input type="hidden" name="qty" value="0" />
+                            <button type="submit" class="btn btn-sm btn-danger" title="Hapus Order">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </form>
+                    </td>
                 </tr>
             }
         </tbody>

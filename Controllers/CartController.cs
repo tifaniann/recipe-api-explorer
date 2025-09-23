@@ -49,7 +49,6 @@ namespace TheMealDBApp.Controllers
             {
                 IdCust = idCust.Value,
                 IdCategory = idCategory,
-                StrCategory = strCategory,
                 Jml = qty
             });
 
@@ -57,7 +56,7 @@ namespace TheMealDBApp.Controllers
         }
 
         // [HttpPost]
-        // public async Task<IActionResult> UpdateQty(string idCategory, int qty)
+        // public async Task<IActionResult> UpdateQty(int idCategory, int qty)
         // {
         //     var idCust = HttpContext.Session.GetInt32("IdCust");
         //     if (idCust == null)

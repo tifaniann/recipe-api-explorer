@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TheMealDBApp.Data;
 
@@ -11,9 +12,11 @@ using TheMealDBApp.Data;
 namespace TheMealDBApp.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20250923011857_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,6 +41,9 @@ namespace TheMealDBApp.Migrations
 
                     b.Property<int?>("Jml")
                         .HasColumnType("int");
+
+                    b.Property<string>("StrCategory")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
 

@@ -59,7 +59,6 @@ namespace TheMealDBApp.Repository
                 {
                     OrderID = order.OrderID,  
                     IdCategory = item.IdCategory,
-                    StrCategory = item.StrCategory,
                     Jml = item.Jml ?? 1
                 };
                 _context.OrdersDetail.Add(detail);

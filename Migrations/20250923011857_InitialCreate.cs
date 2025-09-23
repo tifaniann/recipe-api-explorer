@@ -82,15 +82,16 @@ namespace TheMealDBApp.Migrations
                 name: "Categories_Temp",
                 columns: table => new
                 {
-                    IdCategory = table.Column<int>(type: "int", nullable: false)
+                    ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    IdCategory = table.Column<int>(type: "int", nullable: false),
                     IdCust = table.Column<int>(type: "int", nullable: true),
                     StrCategory = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Jml = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Categories_Temp", x => x.IdCategory);
+                    table.PrimaryKey("PK_Categories_Temp", x => x.ID);
                     table.ForeignKey(
                         name: "FK_Categories_Temp_Users_IdCust",
                         column: x => x.IdCust,

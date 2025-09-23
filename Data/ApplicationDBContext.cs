@@ -36,8 +36,8 @@ namespace TheMealDBApp.Data
 
             modelBuilder.Entity<Categories_Temp>(entity =>
             {
-                entity.HasKey(c => c.IdCategory); //primary key
-                entity.Property(c => c.IdCategory).ValueGeneratedOnAdd(); //auto increment
+                entity.HasKey(c => c.ID); //primary key
+                entity.Property(c => c.ID).ValueGeneratedOnAdd(); //auto increment
             });
 
             modelBuilder.Entity<Orders>()

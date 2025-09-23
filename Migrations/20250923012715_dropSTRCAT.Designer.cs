@@ -12,8 +12,8 @@ using TheMealDBApp.Data;
 namespace TheMealDBApp.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20250920052045_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250923012715_dropSTRCAT")]
+    partial class dropSTRCAT
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,11 +27,14 @@ namespace TheMealDBApp.Migrations
 
             modelBuilder.Entity("TheMealDBApp.Models.Categories_Temp", b =>
                 {
-                    b.Property<int>("IdCategory")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdCategory"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<int>("IdCategory")
+                        .HasColumnType("int");
 
                     b.Property<int?>("IdCust")
                         .HasColumnType("int");
@@ -39,10 +42,7 @@ namespace TheMealDBApp.Migrations
                     b.Property<int?>("Jml")
                         .HasColumnType("int");
 
-                    b.Property<string>("StrCategory")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("IdCategory");
+                    b.HasKey("ID");
 
                     b.HasIndex("IdCust");
 

@@ -56,6 +56,7 @@
         asp-action="CheckoutPdf" 
         asp-controller="Cart" 
         method="post" 
+        
         onsubmit="return confirmAndOpenPdf('@Context.Session.GetInt32("IdCust")');"
         style="text-align:right; margin-top:10px;">
         <div style="text-align: right; margin-top:10px;">
@@ -63,7 +64,7 @@
                     style="border: none; background-color: #007bff; color: white; 
                         padding: 8px 16px; border-radius: 6px; cursor: pointer; 
                         font-size: 14px; font-weight: 600;">
-                Order
+                Print Order
             </button>
         </div>
     </form>
@@ -80,24 +81,27 @@
                 padding:20px; 
                 border-radius:10px; 
                 z-index:9999;">
-        Order berhasil dibuat. Silahkan melakukan pembayaran di kasir
+        Order berhasil!
     </div>
 </div>
 
 @section Scripts {
     <script>
         function confirmAndOpenPdf(idcust) {
-            const msg = document.getElementById("successMessage");
-            msg.style.display = "flex";
+        const msg = document.getElementById("successMessage");
+        msg.style.display = "flex";
 
-            // submit form setelah delay
+        setTimeout(() => {
+            document.getElementById("FormCO-" + idcust).submit();
+
+            // lalu redirect halaman utama ke Index
             setTimeout(() => {
-                // button.closest('form') untuk submit form yang diklik
-                document.getElementById("FormCO-" + idcust).submit();
-            }, 2500);
+                window.location.href = "/Home/Index";
+            }, 1000); // kasih jeda biar download sempat mulai
+        }, 1500);
 
-            return false; // hentikan submit default dulu
-        }
+        return false; // cegah submit default
+    }
 
     </script>
 }

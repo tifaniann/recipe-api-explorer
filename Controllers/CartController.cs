@@ -98,7 +98,7 @@ namespace TheMealDBApp.Controllers
             var pdfBytes = GeneratePdf(orders); // sementara blank
             var result = await _cartRepo.ClearCarttAsync(custId);
             return File(pdfBytes, "application/pdf", "Order.pdf");
-            return RedirectToAction("Index", "Home");
+            // return RedirectToAction("Index", "Home");
         }
 
         private byte[] GeneratePdf(Task<List<Categories_Temp>>? orders)
@@ -120,7 +120,7 @@ namespace TheMealDBApp.Controllers
                 cb.BeginText();
                 cb.SetColorFill(BaseColor.LIGHT_GRAY);
                 cb.SetFontAndSize(bf, 50);
-                cb.ShowTextAligned(Element.ALIGN_CENTER, "Nama Toko", 300, 450, 45); // x,y dan rotasi(atur kemiringan)
+                cb.ShowTextAligned(Element.ALIGN_CENTER, "Glow N Bliss", 300, 450, 45); // x,y dan rotasi(atur kemiringan)
                 cb.EndText();
 
                 // Tambahkan tanggal dan jam

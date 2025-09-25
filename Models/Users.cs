@@ -21,6 +21,7 @@ namespace TheMealDBApp.Models
         [EmailAddress]
         [MaxLength(100)]
         public string? Email { get; set; }
+        public string? Name { get; set; } 
 
         public List<Categories_Temp>? Categories_Temps { get; set; }
     }

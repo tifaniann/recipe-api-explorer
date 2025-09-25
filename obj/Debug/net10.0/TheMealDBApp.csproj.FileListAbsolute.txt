@@ -10,7 +10,9 @@ C:\Users\Admin\Documents\PROGRAM TIFANI\TheMealDBApp\bin\Debug\net10.0\TheMealDB
 C:\Users\Admin\Documents\PROGRAM TIFANI\TheMealDBApp\bin\Debug\net10.0\Azure.Core.dll
 C:\Users\Admin\Documents\PROGRAM TIFANI\TheMealDBApp\bin\Debug\net10.0\Azure.Identity.dll
 C:\Users\Admin\Documents\PROGRAM TIFANI\TheMealDBApp\bin\Debug\net10.0\BCrypt.Net-Next.dll
+C:\Users\Admin\Documents\PROGRAM TIFANI\TheMealDBApp\bin\Debug\net10.0\BouncyCastle.Crypto.dll
 C:\Users\Admin\Documents\PROGRAM TIFANI\TheMealDBApp\bin\Debug\net10.0\Humanizer.dll
+C:\Users\Admin\Documents\PROGRAM TIFANI\TheMealDBApp\bin\Debug\net10.0\itextsharp.dll
 C:\Users\Admin\Documents\PROGRAM TIFANI\TheMealDBApp\bin\Debug\net10.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\Admin\Documents\PROGRAM TIFANI\TheMealDBApp\bin\Debug\net10.0\Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll
 C:\Users\Admin\Documents\PROGRAM TIFANI\TheMealDBApp\bin\Debug\net10.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
@@ -239,5 +241,3 @@ C:\Users\Admin\Documents\PROGRAM TIFANI\TheMealDBApp\obj\Debug\net10.0\refint\Th
 C:\Users\Admin\Documents\PROGRAM TIFANI\TheMealDBApp\obj\Debug\net10.0\TheMealDBApp.pdb
 C:\Users\Admin\Documents\PROGRAM TIFANI\TheMealDBApp\obj\Debug\net10.0\TheMealDBApp.genruntimeconfig.cache
 C:\Users\Admin\Documents\PROGRAM TIFANI\TheMealDBApp\obj\Debug\net10.0\ref\TheMealDBApp.dll
-C:\Users\Admin\Documents\PROGRAM TIFANI\TheMealDBApp\bin\Debug\net10.0\BouncyCastle.Crypto.dll
-C:\Users\Admin\Documents\PROGRAM TIFANI\TheMealDBApp\bin\Debug\net10.0\itextsharp.dll

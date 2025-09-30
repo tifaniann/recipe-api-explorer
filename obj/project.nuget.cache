@@ -1,22 +1,22 @@
 {
   "version": 2,
-  "dgSpecHash": "nzmHDVJCzUA=",
+  "dgSpecHash": "yrPHyEoZ4C0=",
   "success": true,
   "projectFilePath": "C:\\Users\\Admin\\Documents\\PROGRAM TIFANI\\TheMealDBApp\\TheMealDBApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
-    "C:\\Users\\Admin\\.nuget\\packages\\bouncycastle\\1.8.9\\bouncycastle.1.8.9.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\bouncycastle.cryptography\\2.6.2\\bouncycastle.cryptography.2.6.2.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
-    "C:\\Users\\Admin\\.nuget\\packages\\itextsharp\\5.5.13.3\\itextsharp.5.5.13.3.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\itext\\9.3.0\\itext.9.3.0.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\itext.bouncy-castle-adapter\\9.3.0\\itext.bouncy-castle-adapter.9.3.0.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\itext.commons\\9.3.0\\itext.commons.9.3.0.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\itext7\\9.3.0\\itext7.9.3.0.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\itext7.bouncy-castle-adapter\\9.3.0\\itext7.bouncy-castle-adapter.9.3.0.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\9.0.8\\microsoft.aspnetcore.authentication.jwtbearer.9.0.8.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.diagnostics.entityframeworkcore\\9.0.6\\microsoft.aspnetcore.diagnostics.entityframeworkcore.9.0.6.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\9.0.6\\microsoft.aspnetcore.identity.entityframeworkcore.9.0.6.nupkg.sha512",
-    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.identity.service\\1.0.0-preview1-final\\microsoft.aspnetcore.identity.service.1.0.0-preview1-final.nupkg.sha512",
-    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.identity.service.abstractions\\1.0.0-preview1-final\\microsoft.aspnetcore.identity.service.abstractions.1.0.0-preview1-final.nupkg.sha512",
-    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.identity.service.core\\1.0.0-preview1-final\\microsoft.aspnetcore.identity.service.core.1.0.0-preview1-final.nupkg.sha512",
-    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.identity.service.entityframeworkcore\\1.0.0-preview1-final\\microsoft.aspnetcore.identity.service.entityframeworkcore.1.0.0-preview1-final.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\9.0.7\\microsoft.aspnetcore.jsonpatch.9.0.7.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\9.0.7\\microsoft.aspnetcore.mvc.newtonsoftjson.9.0.7.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.6\\microsoft.aspnetcore.openapi.9.0.6.nupkg.sha512",
@@ -32,6 +32,7 @@
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.data.sqlclient\\5.1.6\\microsoft.data.sqlclient.5.1.6.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\5.1.1\\microsoft.data.sqlclient.sni.runtime.5.1.1.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.data.sqlite.core\\9.0.6\\microsoft.data.sqlite.core.9.0.6.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.dotnet.platformabstractions\\1.1.0\\microsoft.dotnet.platformabstractions.1.1.0.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.entityframeworkcore\\9.0.6\\microsoft.entityframeworkcore.9.0.6.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\9.0.6\\microsoft.entityframeworkcore.abstractions.9.0.6.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\9.0.6\\microsoft.entityframeworkcore.analyzers.9.0.6.nupkg.sha512",
@@ -78,66 +79,5 @@
     "C:\\Users\\Admin\\.nuget\\packages\\system.security.permissions\\6.0.0\\system.security.permissions.6.0.0.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1902",
-      "level": "Warning",
-      "message": "Package 'BouncyCastle' 1.8.9 has a known moderate severity vulnerability, https://github.com/advisories/GHSA-8xfc-gm6g-vgpv",
-      "projectPath": "C:\\Users\\Admin\\Documents\\PROGRAM TIFANI\\TheMealDBApp\\TheMealDBApp.csproj",
-      "warningLevel": 1,
-      "filePath": "C:\\Users\\Admin\\Documents\\PROGRAM TIFANI\\TheMealDBApp\\TheMealDBApp.csproj",
-      "libraryId": "BouncyCastle",
-      "targetGraphs": [
-        "net10.0"
-      ]
-    },
-    {
-      "code": "NU1902",
-      "level": "Warning",
-      "message": "Package 'BouncyCastle' 1.8.9 has a known moderate severity vulnerability, https://github.com/advisories/GHSA-m44j-cfrm-g8qc",
-      "projectPath": "C:\\Users\\Admin\\Documents\\PROGRAM TIFANI\\TheMealDBApp\\TheMealDBApp.csproj",
-      "warningLevel": 1,
-      "filePath": "C:\\Users\\Admin\\Documents\\PROGRAM TIFANI\\TheMealDBApp\\TheMealDBApp.csproj",
-      "libraryId": "BouncyCastle",
-      "targetGraphs": [
-        "net10.0"
-      ]
-    },
-    {
-      "code": "NU1902",
-      "level": "Warning",
-      "message": "Package 'BouncyCastle' 1.8.9 has a known moderate severity vulnerability, https://github.com/advisories/GHSA-v435-xc8x-wvr9",
-      "projectPath": "C:\\Users\\Admin\\Documents\\PROGRAM TIFANI\\TheMealDBApp\\TheMealDBApp.csproj",
-      "warningLevel": 1,
-      "filePath": "C:\\Users\\Admin\\Documents\\PROGRAM TIFANI\\TheMealDBApp\\TheMealDBApp.csproj",
-      "libraryId": "BouncyCastle",
-      "targetGraphs": [
-        "net10.0"
-      ]
-    },
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "message": "Package 'BouncyCastle 1.8.9' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net10.0'. This package may not be fully compatible with your project.",
-      "projectPath": "C:\\Users\\Admin\\Documents\\PROGRAM TIFANI\\TheMealDBApp\\TheMealDBApp.csproj",
-      "warningLevel": 1,
-      "filePath": "C:\\Users\\Admin\\Documents\\PROGRAM TIFANI\\TheMealDBApp\\TheMealDBApp.csproj",
-      "libraryId": "BouncyCastle",
-      "targetGraphs": [
-        "net10.0"
-      ]
-    },
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "message": "Package 'iTextSharp 5.5.13.3' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net10.0'. This package may not be fully compatible with your project.",
-      "projectPath": "C:\\Users\\Admin\\Documents\\PROGRAM TIFANI\\TheMealDBApp\\TheMealDBApp.csproj",
-      "warningLevel": 1,
-      "filePath": "C:\\Users\\Admin\\Documents\\PROGRAM TIFANI\\TheMealDBApp\\TheMealDBApp.csproj",
-      "libraryId": "iTextSharp",
-      "targetGraphs": [
-        "net10.0"
-      ]
-    }
-  ]
+  "logs": []
 }

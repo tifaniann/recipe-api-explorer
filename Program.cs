@@ -7,6 +7,7 @@ using TheMealDBApp.Repository;
 var builder = WebApplication.CreateBuilder(args);
 
 // 1. Tambahkan service sebelum builder.Build()
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllers();
 builder.Services.AddHttpClient<HomeController>();
 builder.Services.AddControllersWithViews();

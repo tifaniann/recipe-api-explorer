@@ -68,10 +68,6 @@
               "target": "Package",
               "version": "[9.0.6, )"
             },
-            "Microsoft.AspNetCore.Identity.Service.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[1.0.0-preview1-final, )"
-            },
             "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
               "target": "Package",
               "version": "[9.0.7, )"
@@ -100,10 +96,6 @@
               "target": "Package",
               "version": "[9.0.6, )"
             },
-            "Microsoft.SqlServer.Server": {
-              "target": "Package",
-              "version": "[1.0.0, )"
-            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"
@@ -112,9 +104,13 @@
               "target": "Package",
               "version": "[9.0.3, )"
             },
-            "iTextSharp": {
+            "itext7": {
               "target": "Package",
-              "version": "[5.5.13.3, )"
+              "version": "[9.3.0, )"
+            },
+            "itext7.bouncy-castle-adapter": {
+              "target": "Package",
+              "version": "[9.3.0, )"
             }
           },
           "imports": [

@@ -52,13 +52,17 @@
           }
         }
       },
-      "BouncyCastle/1.8.9": {
+      "BouncyCastle.Cryptography/2.6.2": {
         "type": "package",
         "compile": {
-          "lib/BouncyCastle.Crypto.dll": {}
+          "lib/net6.0/BouncyCastle.Cryptography.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/BouncyCastle.Crypto.dll": {}
+          "lib/net6.0/BouncyCastle.Cryptography.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Humanizer.Core/2.14.1": {
@@ -74,16 +78,124 @@
           }
         }
       },
-      "iTextSharp/5.5.13.3": {
+      "itext/9.3.0": {
         "type": "package",
         "dependencies": {
-          "BouncyCastle": "1.8.9"
+          "Microsoft.DotNet.PlatformAbstractions": "1.1.0",
+          "Microsoft.Extensions.DependencyModel": "1.1.0",
+          "itext.commons": "9.3.0"
         },
         "compile": {
-          "lib/itextsharp.dll": {}
+          "lib/netstandard2.0/itext.barcodes.dll": {
+            "related": ".xml"
+          },
+          "lib/netstandard2.0/itext.bouncy-castle-connector.dll": {
+            "related": ".xml"
+          },
+          "lib/netstandard2.0/itext.forms.dll": {
+            "related": ".xml"
+          },
+          "lib/netstandard2.0/itext.io.dll": {
+            "related": ".xml"
+          },
+          "lib/netstandard2.0/itext.kernel.dll": {
+            "related": ".xml"
+          },
+          "lib/netstandard2.0/itext.layout.dll": {
+            "related": ".xml"
+          },
+          "lib/netstandard2.0/itext.pdfa.dll": {
+            "related": ".xml"
+          },
+          "lib/netstandard2.0/itext.pdfua.dll": {
+            "related": ".xml"
+          },
+          "lib/netstandard2.0/itext.sign.dll": {
+            "related": ".xml"
+          },
+          "lib/netstandard2.0/itext.styledxmlparser.dll": {
+            "related": ".xml"
+          },
+          "lib/netstandard2.0/itext.svg.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/itextsharp.dll": {}
+          "lib/netstandard2.0/itext.barcodes.dll": {
+            "related": ".xml"
+          },
+          "lib/netstandard2.0/itext.bouncy-castle-connector.dll": {
+            "related": ".xml"
+          },
+          "lib/netstandard2.0/itext.forms.dll": {
+            "related": ".xml"
+          },
+          "lib/netstandard2.0/itext.io.dll": {
+            "related": ".xml"
+          },
+          "lib/netstandard2.0/itext.kernel.dll": {
+            "related": ".xml"
+          },
+          "lib/netstandard2.0/itext.layout.dll": {
+            "related": ".xml"
+          },
+          "lib/netstandard2.0/itext.pdfa.dll": {
+            "related": ".xml"
+          },
+          "lib/netstandard2.0/itext.pdfua.dll": {
+            "related": ".xml"
+          },
+          "lib/netstandard2.0/itext.sign.dll": {
+            "related": ".xml"
+          },
+          "lib/netstandard2.0/itext.styledxmlparser.dll": {
+            "related": ".xml"
+          },
+          "lib/netstandard2.0/itext.svg.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "itext.bouncy-castle-adapter/9.3.0": {
+        "type": "package",
+        "dependencies": {
+          "BouncyCastle.Cryptography": "2.6.2",
+          "itext.commons": "9.3.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/itext.bouncy-castle-adapter.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/itext.bouncy-castle-adapter.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "itext.commons/9.3.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/itext.commons.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/itext.commons.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "itext7/9.3.0": {
+        "type": "package",
+        "dependencies": {
+          "itext": "9.3.0"
+        }
+      },
+      "itext7.bouncy-castle-adapter/9.3.0": {
+        "type": "package",
+        "dependencies": {
+          "itext.bouncy-castle-adapter": "9.3.0"
         }
       },
       "Microsoft.AspNetCore.Authentication.JwtBearer/9.0.8": {
@@ -136,71 +248,6 @@
         },
         "runtime": {
           "lib/net9.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "Microsoft.AspNetCore.Identity.Service/1.0.0-preview1-final": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNetCore.Identity.Service.Core": "1.0.0-preview1-final"
-        },
-        "compile": {
-          "lib/netcoreapp2.0/Microsoft.AspNetCore.Identity.Service.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/netcoreapp2.0/Microsoft.AspNetCore.Identity.Service.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "Microsoft.AspNetCore.Identity.Service.Abstractions/1.0.0-preview1-final": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.IdentityModel.Protocols.OpenIdConnect": "2.1.3"
-        },
-        "compile": {
-          "lib/netcoreapp2.0/Microsoft.AspNetCore.Identity.Service.Abstractions.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/netcoreapp2.0/Microsoft.AspNetCore.Identity.Service.Abstractions.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "Microsoft.AspNetCore.Identity.Service.Core/1.0.0-preview1-final": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNetCore.Identity.Service.Abstractions": "1.0.0-preview1-final"
-        },
-        "compile": {
-          "lib/netcoreapp2.0/Microsoft.AspNetCore.Identity.Service.Core.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/netcoreapp2.0/Microsoft.AspNetCore.Identity.Service.Core.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "Microsoft.AspNetCore.Identity.Service.EntityFrameworkCore/1.0.0-preview1-final": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "2.0.0-preview1-final",
-          "Microsoft.AspNetCore.Identity.Service": "1.0.0-preview1-final"
-        },
-        "compile": {
-          "lib/netcoreapp2.0/Microsoft.AspNetCore.Identity.Service.EntityFrameworkCore.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/netcoreapp2.0/Microsoft.AspNetCore.Identity.Service.EntityFrameworkCore.dll": {
             "related": ".xml"
           }
         }
@@ -673,6 +720,15 @@
           "lib/net8.0/Microsoft.Data.Sqlite.dll": {
             "related": ".xml"
           }
+        }
+      },
+      "Microsoft.DotNet.PlatformAbstractions/1.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard1.3/Microsoft.DotNet.PlatformAbstractions.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/Microsoft.DotNet.PlatformAbstractions.dll": {}
         }
       },
       "Microsoft.EntityFrameworkCore/9.0.6": {
@@ -1498,17 +1554,24 @@
         "readme.md"
       ]
     },
-    "BouncyCastle/1.8.9": {
-      "sha512": "axnBgvdD5n+FnEG6efk/tfKuMFru7R/EoISH9zjh319yb3HD24TEHSAbNN/lTRT2ulOGRxDgOsCjkuk08iwWPg==",
+    "BouncyCastle.Cryptography/2.6.2": {
+      "sha512": "7oWOcvnntmMKNzDLsdxAYqApt+AjpRpP2CShjMfIa3umZ42UQMvH0tl1qAliYPNYO6vTdcGMqnRrCPmsfzTI1w==",
       "type": "package",
-      "path": "bouncycastle/1.8.9",
+      "path": "bouncycastle.cryptography/2.6.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
+        "LICENSE.md",
         "README.md",
-        "bouncycastle.1.8.9.nupkg.sha512",
-        "bouncycastle.nuspec",
-        "lib/BouncyCastle.Crypto.dll"
+        "bouncycastle.cryptography.2.6.2.nupkg.sha512",
+        "bouncycastle.cryptography.nuspec",
+        "lib/net461/BouncyCastle.Cryptography.dll",
+        "lib/net461/BouncyCastle.Cryptography.xml",
+        "lib/net6.0/BouncyCastle.Cryptography.dll",
+        "lib/net6.0/BouncyCastle.Cryptography.xml",
+        "lib/netstandard2.0/BouncyCastle.Cryptography.dll",
+        "lib/netstandard2.0/BouncyCastle.Cryptography.xml",
+        "packageIcon.png"
       ]
     },
     "Humanizer.Core/2.14.1": {
@@ -1529,20 +1592,127 @@
         "logo.png"
       ]
     },
-    "iTextSharp/5.5.13.3": {
-      "sha512": "vtnMhTEJdZFCkLqaQLjD8aqTBIVKHPrSFuSXnxbLEJlvE/j/l88fvG9wtsejXTmhtErMo0lA9T2LdfdfbwplYw==",
+    "itext/9.3.0": {
+      "sha512": "VFfpdCRnntNzaEp154l5UxHs/Gbg9JKBjUAEf3zuEH+4QBz3FzyyygImt93Ul5nmTdTPoQ5hjUiG/K3heacbyg==",
       "type": "package",
-      "path": "itextsharp/5.5.13.3",
+      "path": "itext/9.3.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
+        "ITSC-avatar.png",
+        "LICENSE.md",
+        "NOTICE_barcodes.txt",
+        "NOTICE_io.txt",
+        "NOTICE_kernel.txt",
+        "NOTICE_layout.txt",
+        "NOTICE_styledxmlparser.txt",
+        "gnu-agpl-v3.0.md",
+        "itext.9.3.0.nupkg.sha512",
+        "itext.nuspec",
+        "lib/net461/itext.barcodes.dll",
+        "lib/net461/itext.barcodes.xml",
+        "lib/net461/itext.bouncy-castle-connector.dll",
+        "lib/net461/itext.bouncy-castle-connector.xml",
+        "lib/net461/itext.forms.dll",
+        "lib/net461/itext.forms.xml",
+        "lib/net461/itext.io.dll",
+        "lib/net461/itext.io.xml",
+        "lib/net461/itext.kernel.dll",
+        "lib/net461/itext.kernel.xml",
+        "lib/net461/itext.layout.dll",
+        "lib/net461/itext.layout.xml",
+        "lib/net461/itext.pdfa.dll",
+        "lib/net461/itext.pdfa.xml",
+        "lib/net461/itext.pdfua.dll",
+        "lib/net461/itext.pdfua.xml",
+        "lib/net461/itext.sign.dll",
+        "lib/net461/itext.sign.xml",
+        "lib/net461/itext.styledxmlparser.dll",
+        "lib/net461/itext.styledxmlparser.xml",
+        "lib/net461/itext.svg.dll",
+        "lib/net461/itext.svg.xml",
+        "lib/netstandard2.0/itext.barcodes.dll",
+        "lib/netstandard2.0/itext.barcodes.xml",
+        "lib/netstandard2.0/itext.bouncy-castle-connector.dll",
+        "lib/netstandard2.0/itext.bouncy-castle-connector.xml",
+        "lib/netstandard2.0/itext.forms.dll",
+        "lib/netstandard2.0/itext.forms.xml",
+        "lib/netstandard2.0/itext.io.dll",
+        "lib/netstandard2.0/itext.io.xml",
+        "lib/netstandard2.0/itext.kernel.dll",
+        "lib/netstandard2.0/itext.kernel.xml",
+        "lib/netstandard2.0/itext.layout.dll",
+        "lib/netstandard2.0/itext.layout.xml",
+        "lib/netstandard2.0/itext.pdfa.dll",
+        "lib/netstandard2.0/itext.pdfa.xml",
+        "lib/netstandard2.0/itext.pdfua.dll",
+        "lib/netstandard2.0/itext.pdfua.xml",
+        "lib/netstandard2.0/itext.sign.dll",
+        "lib/netstandard2.0/itext.sign.xml",
+        "lib/netstandard2.0/itext.styledxmlparser.dll",
+        "lib/netstandard2.0/itext.styledxmlparser.xml",
+        "lib/netstandard2.0/itext.svg.dll",
+        "lib/netstandard2.0/itext.svg.xml"
+      ]
+    },
+    "itext.bouncy-castle-adapter/9.3.0": {
+      "sha512": "C7q8wbwDyc2npzKBRF46KnueJON6in3QEdPlsz7VvXDqClRF1C0VfE6HwVCpJJ5Q5qADNSYNbtXFZgD7T1/51g==",
+      "type": "package",
+      "path": "itext.bouncy-castle-adapter/9.3.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ITSC-avatar.png",
+        "itext.bouncy-castle-adapter.9.3.0.nupkg.sha512",
+        "itext.bouncy-castle-adapter.nuspec",
+        "lib/net461/itext.bouncy-castle-adapter.dll",
+        "lib/net461/itext.bouncy-castle-adapter.xml",
+        "lib/netstandard2.0/itext.bouncy-castle-adapter.dll",
+        "lib/netstandard2.0/itext.bouncy-castle-adapter.xml"
+      ]
+    },
+    "itext.commons/9.3.0": {
+      "sha512": "kSoAGkXjI0vASBREnT1rvhUae1xQX2jd/W5ot0pmaqeurzpVGP04u10Mk0DqZZBTDaF5p/g9KRFnqxhjfOE2hA==",
+      "type": "package",
+      "path": "itext.commons/9.3.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ITSC-avatar.png",
+        "itext.commons.9.3.0.nupkg.sha512",
+        "itext.commons.nuspec",
+        "lib/net461/itext.commons.dll",
+        "lib/net461/itext.commons.xml",
+        "lib/netstandard2.0/itext.commons.dll",
+        "lib/netstandard2.0/itext.commons.xml"
+      ]
+    },
+    "itext7/9.3.0": {
+      "sha512": "rO7ShRLngeoH+1PtiI94DzzLPVusdBbbStspdk7hkxIy0ppdgU+xctQUQHr2o1N3feT6kVXLTJ57WcuvNPwk2Q==",
+      "type": "package",
+      "path": "itext7/9.3.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ITSC-avatar.png",
         "LICENSE.md",
         "gnu-agpl-v3.0.md",
-        "itextsharp.5.5.13.3.nupkg.sha512",
-        "itextsharp.nuspec",
-        "lib/iTextSharp.xml",
-        "lib/itextsharp.dll",
-        "notice.txt"
+        "itext7.9.3.0.nupkg.sha512",
+        "itext7.nuspec"
+      ]
+    },
+    "itext7.bouncy-castle-adapter/9.3.0": {
+      "sha512": "B8I9+xX+96T1+CTKeXq0UlWSMQcGigUkzqaQSXJT6RmfkK1zTVxDJDw5RdmwziY4xdPWZspnC+IHWICBJUfvyQ==",
+      "type": "package",
+      "path": "itext7.bouncy-castle-adapter/9.3.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ITSC-avatar.png",
+        "LICENSE.md",
+        "gnu-agpl-v3.0.md",
+        "itext7.bouncy-castle-adapter.9.3.0.nupkg.sha512",
+        "itext7.bouncy-castle-adapter.nuspec"
       ]
     },
     "Microsoft.AspNetCore.Authentication.JwtBearer/9.0.8": {
@@ -1589,58 +1759,6 @@
         "lib/net9.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.xml",
         "microsoft.aspnetcore.identity.entityframeworkcore.9.0.6.nupkg.sha512",
         "microsoft.aspnetcore.identity.entityframeworkcore.nuspec"
-      ]
-    },
-    "Microsoft.AspNetCore.Identity.Service/1.0.0-preview1-final": {
-      "sha512": "/JhDncTf142tYI7Giocugd9Q8MSXd7eo9D3bbojeiOTyo7vfbgkf1GlQiroXSGEUqOjk/GsecbzUCiWtUKHqKw==",
-      "type": "package",
-      "path": "microsoft.aspnetcore.identity.service/1.0.0-preview1-final",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netcoreapp2.0/Microsoft.AspNetCore.Identity.Service.dll",
-        "lib/netcoreapp2.0/Microsoft.AspNetCore.Identity.Service.xml",
-        "microsoft.aspnetcore.identity.service.1.0.0-preview1-final.nupkg.sha512",
-        "microsoft.aspnetcore.identity.service.nuspec"
-      ]
-    },
-    "Microsoft.AspNetCore.Identity.Service.Abstractions/1.0.0-preview1-final": {
-      "sha512": "RGWX5snjs1LYC37D5P3aLQcxBKfq7UkcRo788Dz7DZYnTwX+UdeTbUGIXiLKyw3ruM+sVDhdFF1msoNOHj2o3g==",
-      "type": "package",
-      "path": "microsoft.aspnetcore.identity.service.abstractions/1.0.0-preview1-final",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netcoreapp2.0/Microsoft.AspNetCore.Identity.Service.Abstractions.dll",
-        "lib/netcoreapp2.0/Microsoft.AspNetCore.Identity.Service.Abstractions.xml",
-        "microsoft.aspnetcore.identity.service.abstractions.1.0.0-preview1-final.nupkg.sha512",
-        "microsoft.aspnetcore.identity.service.abstractions.nuspec"
-      ]
-    },
-    "Microsoft.AspNetCore.Identity.Service.Core/1.0.0-preview1-final": {
-      "sha512": "BOH+x9II9U6wrGx7CCkIcqklS0Cs/W31vBfJ1RHoLAvygM4uAPjDOIQTPQ27tSanry6tgBLIsuBhEQmA4xHIpw==",
-      "type": "package",
-      "path": "microsoft.aspnetcore.identity.service.core/1.0.0-preview1-final",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netcoreapp2.0/Microsoft.AspNetCore.Identity.Service.Core.dll",
-        "lib/netcoreapp2.0/Microsoft.AspNetCore.Identity.Service.Core.xml",
-        "microsoft.aspnetcore.identity.service.core.1.0.0-preview1-final.nupkg.sha512",
-        "microsoft.aspnetcore.identity.service.core.nuspec"
-      ]
-    },
-    "Microsoft.AspNetCore.Identity.Service.EntityFrameworkCore/1.0.0-preview1-final": {
-      "sha512": "qkoxBclu4UdH0rIOzwjNlrFzTpTfLmR2m29k3NTjoAFHHrfg7PcC6I1ZNHV0b/yI+kd1/v/vvqslM+6NWQWscA==",
-      "type": "package",
-      "path": "microsoft.aspnetcore.identity.service.entityframeworkcore/1.0.0-preview1-final",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netcoreapp2.0/Microsoft.AspNetCore.Identity.Service.EntityFrameworkCore.dll",
-        "lib/netcoreapp2.0/Microsoft.AspNetCore.Identity.Service.EntityFrameworkCore.xml",
-        "microsoft.aspnetcore.identity.service.entityframeworkcore.1.0.0-preview1-final.nupkg.sha512",
-        "microsoft.aspnetcore.identity.service.entityframeworkcore.nuspec"
       ]
     },
     "Microsoft.AspNetCore.JsonPatch/9.0.7": {
@@ -2770,6 +2888,19 @@
         "lib/netstandard2.0/Microsoft.Data.Sqlite.xml",
         "microsoft.data.sqlite.core.9.0.6.nupkg.sha512",
         "microsoft.data.sqlite.core.nuspec"
+      ]
+    },
+    "Microsoft.DotNet.PlatformAbstractions/1.1.0": {
+      "sha512": "Bl6KYfbFSIW3QIRHAp931iR5h01qHjKghdpAtncwbzNUs0+IUZ+XfwkIU0sQsR33ufGvi3u4dZMIYYFysjpHAA==",
+      "type": "package",
+      "path": "microsoft.dotnet.platformabstractions/1.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net451/Microsoft.DotNet.PlatformAbstractions.dll",
+        "lib/netstandard1.3/Microsoft.DotNet.PlatformAbstractions.dll",
+        "microsoft.dotnet.platformabstractions.1.1.0.nupkg.sha512",
+        "microsoft.dotnet.platformabstractions.nuspec"
       ]
     },
     "Microsoft.EntityFrameworkCore/9.0.6": {
@@ -4007,7 +4138,6 @@
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 9.0.8",
       "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore >= 9.0.6",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 9.0.6",
-      "Microsoft.AspNetCore.Identity.Service.EntityFrameworkCore >= 1.0.0-preview1-final",
       "Microsoft.AspNetCore.Mvc.NewtonsoftJson >= 9.0.7",
       "Microsoft.AspNetCore.OpenApi >= 9.0.6",
       "Microsoft.EntityFrameworkCore >= 9.0.6",
@@ -4015,10 +4145,10 @@
       "Microsoft.EntityFrameworkCore.SqlServer >= 9.0.6",
       "Microsoft.EntityFrameworkCore.Sqlite.Core >= 9.0.6",
       "Microsoft.EntityFrameworkCore.Tools >= 9.0.6",
-      "Microsoft.SqlServer.Server >= 1.0.0",
       "Newtonsoft.Json >= 13.0.3",
       "Swashbuckle.AspNetCore >= 9.0.3",
-      "iTextSharp >= 5.5.13.3"
+      "itext7 >= 9.3.0",
+      "itext7.bouncy-castle-adapter >= 9.3.0"
     ]
   },
   "packageFolders": {
@@ -4090,10 +4220,6 @@
             "target": "Package",
             "version": "[9.0.6, )"
           },
-          "Microsoft.AspNetCore.Identity.Service.EntityFrameworkCore": {
-            "target": "Package",
-            "version": "[1.0.0-preview1-final, )"
-          },
           "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
             "target": "Package",
             "version": "[9.0.7, )"
@@ -4122,10 +4248,6 @@
             "target": "Package",
             "version": "[9.0.6, )"
           },
-          "Microsoft.SqlServer.Server": {
-            "target": "Package",
-            "version": "[1.0.0, )"
-          },
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[13.0.3, )"
@@ -4134,9 +4256,13 @@
             "target": "Package",
             "version": "[9.0.3, )"
           },
-          "iTextSharp": {
+          "itext7": {
             "target": "Package",
-            "version": "[5.5.13.3, )"
+            "version": "[9.3.0, )"
+          },
+          "itext7.bouncy-castle-adapter": {
+            "target": "Package",
+            "version": "[9.3.0, )"
           }
         },
         "imports": [
@@ -4574,57 +4700,5 @@
         }
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1902",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'BouncyCastle' 1.8.9 has a known moderate severity vulnerability, https://github.com/advisories/GHSA-8xfc-gm6g-vgpv",
-      "libraryId": "BouncyCastle",
-      "targetGraphs": [
-        "net10.0"
-      ]
-    },
-    {
-      "code": "NU1902",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'BouncyCastle' 1.8.9 has a known moderate severity vulnerability, https://github.com/advisories/GHSA-m44j-cfrm-g8qc",
-      "libraryId": "BouncyCastle",
-      "targetGraphs": [
-        "net10.0"
-      ]
-    },
-    {
-      "code": "NU1902",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'BouncyCastle' 1.8.9 has a known moderate severity vulnerability, https://github.com/advisories/GHSA-v435-xc8x-wvr9",
-      "libraryId": "BouncyCastle",
-      "targetGraphs": [
-        "net10.0"
-      ]
-    },
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'BouncyCastle 1.8.9' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net10.0'. This package may not be fully compatible with your project.",
-      "libraryId": "BouncyCastle",
-      "targetGraphs": [
-        "net10.0"
-      ]
-    },
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'iTextSharp 5.5.13.3' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net10.0'. This package may not be fully compatible with your project.",
-      "libraryId": "iTextSharp",
-      "targetGraphs": [
-        "net10.0"
-      ]
-    }
-  ]
+  }
 }

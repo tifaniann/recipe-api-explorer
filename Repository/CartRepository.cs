@@ -13,13 +13,17 @@ namespace TheMealDBApp.Repository
     public class CartRepository : ICartRepository
     {
         private readonly ApplicationDBContext _context;
-        public CartRepository(ApplicationDBContext context)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        public CartRepository(ApplicationDBContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
+            _httpContextAccessor = httpContextAccessor;
         }
-
+            
         public async Task<Categories_Temp> addToCartAsync(Categories_Temp itemAdd)
         {
+            var custId = _httpContextAccessor.HttpContext?.Session.GetInt32("IdCust") ?? 0;
             var exist = await _context.Categories_Temp.FirstOrDefaultAsync(c => c.IdCust == itemAdd.IdCust && c.IdCategory == itemAdd.IdCategory);
             if (exist != null)
             {
@@ -31,7 +35,19 @@ namespace TheMealDBApp.Repository
                 await _context.Categories_Temp.AddAsync(itemAdd);
             }
             await _context.SaveChangesAsync();
+            // 1. Buat order baru
+            var order = new Orders
+            {
+                IDcust = custId,
+                OrderDate = DateTime.Now,
+                Status = "Pending"
+            };
+
+            _context.Orders.Add(order);
+            await _context.SaveChangesAsync(); // simpan dulu biar dapat OrderID
             return itemAdd;
+
+            
         }
 
         public async Task<Categories_Temp> ClearCarttAsync(int idCust)
@@ -40,24 +56,30 @@ namespace TheMealDBApp.Repository
 
             if (cartItems == null || !cartItems.Any())
                 throw new Exception("Keranjang kosong.");
-            
-            // 1. Buat order baru
-            var order = new Orders
-            {
-                IDcust = idCust,
-                OrderDate = DateTime.Now,
-                Status = "Pending"
-            };
 
-            _context.Orders.Add(order);
-            await _context.SaveChangesAsync(); // simpan dulu biar dapat OrderID
+            var orderblm = await _context.Orders
+                .Where(o => o.IDcust == idCust && o.Status == "Pending")
+                .OrderByDescending(or => or.OrderID)
+                .FirstOrDefaultAsync();
+
+            if (orderblm != null)
+            {
+                orderblm.Status = "Success";
+                _context.Update(orderblm);
+                await _context.SaveChangesAsync();
+            }
+
+            var order = await _context.Orders
+                .Where(o => o.IDcust == idCust && o.Status == "Success")
+                .OrderByDescending(or => or.OrderID)
+                .FirstOrDefaultAsync();
 
             // 2. Insert detail
             foreach (var item in cartItems)
             {
                 var detail = new OrdersDetail
                 {
-                    OrderID = order.OrderID,  
+                    OrderID = order.OrderID,
                     IdCategory = item.IdCategory,
                     StrCategory = item.StrCategory,
                     Jml = item.Jml ?? 1

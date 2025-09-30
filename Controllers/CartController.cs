@@ -7,10 +7,18 @@ using TheMealDBApp.Data;
 using TheMealDBApp.Filters;
 using TheMealDBApp.Interface;
 // using TheMealDBApp.Migrations;
+using iText.Kernel.Pdf;
+using iText.Layout;
+using iText.Layout.Element;
+using iText.Kernel.Font;
+using iText.IO.Font.Constants;
+using iText.Kernel.Geom;
+using iText.Kernel.Pdf.Canvas;
+using iText.Kernel.Pdf.Extgstate;
+
 using TheMealDBApp.Models;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
 using System.IO;
+using Microsoft.EntityFrameworkCore;
 
 namespace TheMealDBApp.Controllers
 {
@@ -92,42 +100,80 @@ namespace TheMealDBApp.Controllers
         [HttpPost("Cart/CheckoutPdf")]
         public async Task<IActionResult> CheckoutPdf()
         {
+            var now = DateTime.Now;
             var custId = HttpContext.Session.GetInt32("IdCust") ?? 0;
-            var orders = _cartRepo.GetCartAsync(custId);
+            var orders = await _cartRepo.GetCartAsync(custId);
 
-            var pdfBytes = GeneratePdf(orders); // sementara blank
+            var pdfBytes = await GeneratePdf(orders); // sementara blank
             var result = await _cartRepo.ClearCarttAsync(custId);
-            return File(pdfBytes, "application/pdf", "Order.pdf");
+            return File(pdfBytes, "application/pdf", $"Order{custId}_{now:ddMMyyhhmmss}.pdf");
             // return RedirectToAction("Index", "Home");
         }
 
-        private byte[] GeneratePdf(Task<List<Categories_Temp>>? orders)
+        private async Task<byte[]> GeneratePdf(List<Categories_Temp> orders)
         {
             using (var ms = new MemoryStream()) // MemoryStream berguna untuk return PDF langsung tanpa membuat file sementara
             {
+                var custId = HttpContext.Session.GetInt32("IdCust") ?? 0;
+                var name = await _context.Users.Where(u => u.Id == custId).Select(u => u.Name).FirstOrDefaultAsync(); //select name from users where id = custId
                 // Buat dokumen A4
-                var doc = new Document(PageSize.A4);
-                PdfWriter writer = PdfWriter.GetInstance(doc, ms);
-                doc.Open();
+                // Init writer & document
+                var writer = new PdfWriter(ms);
+                var pdf = new PdfDocument(writer);
+                var doc = new Document(pdf, PageSize.A4);
 
                 // Tambahkan watermark
-                PdfContentByte cb = writer.DirectContentUnder; // declare variable penyimpan kanvas
+                var canvas = new PdfCanvas(pdf.AddNewPage()); // declare variable penyimpan kanvas
                 // Atur opacity (transparansi)
-                PdfGState gState = new PdfGState();
-                gState.FillOpacity = 0.2f; // 0.0 = transparan total, 1.0 = solid
-                cb.SetGState(gState);
-                BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
-                cb.BeginText();
-                cb.SetColorFill(BaseColor.LIGHT_GRAY);
-                cb.SetFontAndSize(bf, 50);
-                cb.ShowTextAligned(Element.ALIGN_CENTER, "Glow N Bliss", 300, 450, 45); // x,y dan rotasi(atur kemiringan)
-                cb.EndText();
+                var gState = new PdfExtGState().SetFillOpacity(0.2f);
+                canvas.SaveState();
+                canvas.SetExtGState(gState);
 
-                // Tambahkan tanggal dan jam
-                var now = DateTime.Now;
-                doc.Add(new Paragraph($"Hari/Tanggal: {now:dd-MM-yyyy}"));
-                doc.Add(new Paragraph($"Jam: {now:HH:mm}"));
+                var font = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
+                float angle = (float)(45 * Math.PI / 180); // derajat ke radian
+                float cos = (float)Math.Cos(angle);
+                float sin = (float)Math.Sin(angle);
+                float x = 300;
+                float y = 450;
+                canvas.BeginText();
+                canvas.SetFontAndSize(font, 50);
+                canvas.SetTextMatrix(cos, sin, -sin, cos, x, y);
+                canvas.ShowText("Glow N Bliss");
+                canvas.EndText();
+                canvas.RestoreState();
 
+                var isi = await _context.OrdersDetail
+                    .Where(od => od.Order.IDcust == custId && od.Order.Status == "Success")
+                    .Include(od => od.Order)
+                    .ToListAsync();
+
+                var satuOrder = isi.FirstOrDefault();
+
+                if (satuOrder != null)
+                {
+                    var now = DateTime.Now;
+                    var orderDate = satuOrder.Order.OrderDate;
+                    doc.Add(new Paragraph($"Hari/Tanggal: {orderDate:dddd, dd-MM-yyyy}"));
+                    doc.Add(new Paragraph($"Jam: {orderDate:HH:mm:ss}"));
+                    doc.Add(new Paragraph($"Nama Kasir: {name}"));
+                    doc.Add(new Paragraph("\n"));
+                    doc.Add(new Paragraph("Detail Order:"));
+                    // Buat tabel dengan 4 kolom
+                    var table = new Table(4, true);
+                    table.AddHeaderCell("ID Category");
+                    table.AddHeaderCell("Category");
+                    table.AddHeaderCell("Quantity");
+                    // table.AddHeaderCell("Subtotal");
+
+                    foreach (var item in isi)
+                    {
+                        table.AddCell(item.IdCategory.ToString());
+                        table.AddCell(item.StrCategory ?? "");
+                        table.AddCell(item.Jml.ToString());
+                    }
+                    doc.Add(table);
+                }
+            
                 doc.Close();
                 return ms.ToArray();
             }

@@ -56,7 +56,7 @@
         asp-action="CheckoutPdf" 
         asp-controller="Cart" 
         method="post" 
-        
+        target="_blank"
         onsubmit="return confirmAndOpenPdf('@Context.Session.GetInt32("IdCust")');"
         style="text-align:right; margin-top:10px;">
         <div style="text-align: right; margin-top:10px;">
@@ -97,7 +97,7 @@
             // lalu redirect halaman utama ke Index
             setTimeout(() => {
                 window.location.href = "/Home/Index";
-            }, 1000); // kasih jeda biar download sempat mulai
+            }, 2000); // kasih jeda biar download sempat mulai
         }, 1500);
 
         return false; // cegah submit default

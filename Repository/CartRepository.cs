@@ -46,8 +46,6 @@ namespace TheMealDBApp.Repository
             _context.Orders.Add(order);
             await _context.SaveChangesAsync(); // simpan dulu biar dapat OrderID
             return itemAdd;
-
-            
         }
 
         public async Task<Categories_Temp> ClearCarttAsync(int idCust)

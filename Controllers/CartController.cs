@@ -173,7 +173,7 @@ namespace TheMealDBApp.Controllers
                     }
                     doc.Add(table);
                 }
-            
+                Console.WriteLine("isi count: " + isi.Count);
                 doc.Close();
                 return ms.ToArray();
             }

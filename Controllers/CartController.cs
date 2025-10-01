@@ -7,19 +7,22 @@ using TheMealDBApp.Data;
 using TheMealDBApp.Filters;
 using TheMealDBApp.Interface;
 // using TheMealDBApp.Migrations;
-using iText.Kernel.Pdf;
-using iText.Layout;
-using iText.Layout.Element;
-using iText.Kernel.Font;
-using iText.IO.Font.Constants;
-using iText.Kernel.Geom;
-using iText.Kernel.Pdf.Canvas;
-using iText.Kernel.Pdf.Extgstate;
-
+// using iText.Kernel.Pdf;
+// using iText.Layout;
+// using iText.Layout.Element;
+// using iText.Kernel.Font;
+// using iText.IO.Font.Constants;
+// using iText.Kernel.Geom;
+// using iText.Kernel.Pdf.Canvas;
+// using iText.Kernel.Pdf.Extgstate;
+// using iText.Layout.Borders;
+using QuestPDF.Fluent;
+using QuestPDF.Helpers;
+using QuestPDF.Infrastructure;
 using TheMealDBApp.Models;
 using System.IO;
 using Microsoft.EntityFrameworkCore;
-using iText.Layout.Borders;
+
 
 namespace TheMealDBApp.Controllers
 {
@@ -111,74 +114,147 @@ namespace TheMealDBApp.Controllers
             // return RedirectToAction("Index", "Home");
         }
 
+        // kalo pake net 10
+        // private async Task<byte[]> GeneratePdf(List<Categories_Temp> orders)
+        // {
+        //     using (var ms = new MemoryStream()) // MemoryStream berguna untuk return PDF langsung tanpa membuat file sementara
+        //     {
+        //         var custId = HttpContext.Session.GetInt32("IdCust") ?? 0;
+        //         var name = await _context.Users.Where(u => u.Id == custId).Select(u => u.Name).FirstOrDefaultAsync(); //select name from users where id = custId
+        //         // Buat dokumen A4
+        //         // Init writer & document
+        //         var writer = new PdfWriter(ms);
+        //         var pdf = new PdfDocument(writer);
+        //         var doc = new Document(pdf, PageSize.A4);
+
+        //         // Tambahkan watermark
+        //         var canvas = new PdfCanvas(pdf.AddNewPage()); // declare variable penyimpan kanvas
+        //         // Atur opacity (transparansi)
+        //         var gState = new PdfExtGState().SetFillOpacity(0.2f);
+        //         canvas.SaveState();
+        //         canvas.SetExtGState(gState);
+
+        //         var font = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
+        //         float angle = (float)(45 * Math.PI / 180); // derajat ke radian
+        //         float cos = (float)Math.Cos(angle);
+        //         float sin = (float)Math.Sin(angle);
+        //         float x = 300;
+        //         float y = 450;
+        //         canvas.BeginText();
+        //         canvas.SetFontAndSize(font, 50);
+        //         canvas.SetTextMatrix(cos, sin, -sin, cos, x, y);
+        //         canvas.ShowText("Glow N Bliss");
+        //         canvas.EndText();
+        //         canvas.RestoreState();
+
+        //         var isi = await _context.OrdersDetail
+        //             .Where(od => od.Order.IDcust == custId && od.Order.Status == "Success")
+        //             .Include(od => od.Order)
+        //             .ToListAsync();
+
+        //         var satuOrder = isi.OrderByDescending(od => od.Order.OrderDate).FirstOrDefault();
+
+        //         if (satuOrder != null)
+        //         {
+        //             var now = DateTime.Now;
+        //             var orderDate = satuOrder.Order.OrderDate;
+        //             doc.Add(new Paragraph($"Hari/Tanggal: {orderDate:dddd, dd-MM-yyyy}"));
+        //             doc.Add(new Paragraph($"Jam: {orderDate:HH:mm:ss}"));
+        //             doc.Add(new Paragraph($"Nama Kasir: {name}"));
+        //             doc.Add(new Paragraph("\n"));
+        //             doc.Add(new Paragraph("Detail Order:"));
+        //             // Buat tabel dengan 4 kolom
+        //             var table = new Table(3, true);
+        //             table.AddHeaderCell("ID Category");
+        //             table.AddHeaderCell("Category");
+        //             table.AddHeaderCell("Quantity");
+        //             // table.AddHeaderCell("Subtotal");
+
+        //             foreach (var item in isi)
+        //             {
+        //                 table.AddCell(item.IdCategory.ToString());
+        //                 table.AddCell(item.StrCategory ?? "");
+        //                 table.AddCell(item.Jml.ToString());
+        //             }
+        //             table.SetBorder(new SolidBorder(1));
+        //             doc.Add(table);
+        //         }
+        //         Console.WriteLine("isi count: " + isi.Count);
+        //         doc.Close();
+        //         return ms.ToArray();
+        //     }
+        // }
+        
         private async Task<byte[]> GeneratePdf(List<Categories_Temp> orders)
         {
-            using (var ms = new MemoryStream()) // MemoryStream berguna untuk return PDF langsung tanpa membuat file sementara
+            var custId = HttpContext.Session.GetInt32("IdCust") ?? 0;
+            var name = await _context.Users
+                .Where(u => u.Id == custId)
+                .Select(u => u.Name)
+                .FirstOrDefaultAsync();
+
+            var isi = await _context.OrdersDetail
+                .Where(od => od.Order.IDcust == custId && od.Order.Status == "Success")
+                .Include(od => od.Order)
+                .ToListAsync();
+
+            var satuOrder = isi.OrderByDescending(od => od.Order.OrderDate).FirstOrDefault();
+
+            var now = DateTime.Now;
+            var orderDate = satuOrder?.Order.OrderDate ?? now;
+
+            byte[] pdfBytes = Document.Create(container =>
             {
-                var custId = HttpContext.Session.GetInt32("IdCust") ?? 0;
-                var name = await _context.Users.Where(u => u.Id == custId).Select(u => u.Name).FirstOrDefaultAsync(); //select name from users where id = custId
-                // Buat dokumen A4
-                // Init writer & document
-                var writer = new PdfWriter(ms);
-                var pdf = new PdfDocument(writer);
-                var doc = new Document(pdf, PageSize.A4);
-
-                // Tambahkan watermark
-                var canvas = new PdfCanvas(pdf.AddNewPage()); // declare variable penyimpan kanvas
-                // Atur opacity (transparansi)
-                var gState = new PdfExtGState().SetFillOpacity(0.2f);
-                canvas.SaveState();
-                canvas.SetExtGState(gState);
-
-                var font = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
-                float angle = (float)(45 * Math.PI / 180); // derajat ke radian
-                float cos = (float)Math.Cos(angle);
-                float sin = (float)Math.Sin(angle);
-                float x = 300;
-                float y = 450;
-                canvas.BeginText();
-                canvas.SetFontAndSize(font, 50);
-                canvas.SetTextMatrix(cos, sin, -sin, cos, x, y);
-                canvas.ShowText("Glow N Bliss");
-                canvas.EndText();
-                canvas.RestoreState();
-
-                var isi = await _context.OrdersDetail
-                    .Where(od => od.Order.IDcust == custId && od.Order.Status == "Success")
-                    .Include(od => od.Order)
-                    .ToListAsync();
-
-                var satuOrder = isi.OrderByDescending(od => od.Order.OrderDate).FirstOrDefault();
-
-                if (satuOrder != null)
+                container.Page(page =>
                 {
-                    var now = DateTime.Now;
-                    var orderDate = satuOrder.Order.OrderDate;
-                    doc.Add(new Paragraph($"Hari/Tanggal: {orderDate:dddd, dd-MM-yyyy}"));
-                    doc.Add(new Paragraph($"Jam: {orderDate:HH:mm:ss}"));
-                    doc.Add(new Paragraph($"Nama Kasir: {name}"));
-                    doc.Add(new Paragraph("\n"));
-                    doc.Add(new Paragraph("Detail Order:"));
-                    // Buat tabel dengan 4 kolom
-                    var table = new Table(3, true);
-                    table.AddHeaderCell("ID Category");
-                    table.AddHeaderCell("Category");
-                    table.AddHeaderCell("Quantity");
-                    // table.AddHeaderCell("Subtotal");
-
-                    foreach (var item in isi)
+                    page.Size(PageSizes.A4);
+                    page.Margin(20);
+                    page.Content().Column(column =>
                     {
-                        table.AddCell(item.IdCategory.ToString());
-                        table.AddCell(item.StrCategory ?? "");
-                        table.AddCell(item.Jml.ToString());
-                    }
-                    table.SetBorder(new SolidBorder(1));
-                    doc.Add(table);
-                }
-                Console.WriteLine("isi count: " + isi.Count);
-                doc.Close();
-                return ms.ToArray();
-            }
+                        column.Spacing(5);
+
+                        // Header info
+                        column.Item().Text($"Hari/Tanggal: {orderDate:dddd, dd-MM-yyyy}");
+                        column.Item().Text($"Jam: {orderDate:HH:mm:ss}");
+                        column.Item().Text($"Nama Kasir: {name}");
+                        column.Item().Text("\n");
+                        column.Item().Text("Detail Order:");
+
+                        // Tabel
+                        column.Item().Table(table =>
+                        {
+                            table.ColumnsDefinition(columns =>
+                            {
+                                columns.ConstantColumn(100); // ID Category
+                                columns.RelativeColumn(); // Category
+                                columns.ConstantColumn(60); // Quantity
+                            });
+
+                            // Header
+                            table.Header(header =>
+                            {
+                                header.Cell().Element(CellStyle).Text("ID Category");
+                                header.Cell().Element(CellStyle).Text("Category");
+                                header.Cell().Element(CellStyle).Text("Quantity");
+                            });
+
+                            // Data
+                            foreach (var item in isi)
+                            {
+                                table.Cell().Element(CellStyle).Text(item.IdCategory.ToString());
+                                table.Cell().Element(CellStyle).Text(item.StrCategory ?? "");
+                                table.Cell().Element(CellStyle).Text(item.Jml.ToString());
+                            }
+
+                            // Border style
+                            static IContainer CellStyle(IContainer container) =>
+                                container.Border(1).Padding(3);
+                        });
+                    });
+                });
+            }).GeneratePdf();
+
+            return pdfBytes;
         }
 
     }

@@ -88,21 +88,22 @@
 @section Scripts {
     <script>
         function confirmAndOpenPdf(idcust) {
-        const msg = document.getElementById("successMessage");
-        msg.style.display = "flex";
+            const msg = document.getElementById("successMessage");
+            msg.style.display = "flex";
 
-        setTimeout(() => {
-            const form = document.getElementById("FormCO-" + idcust);
-            form.target = "downloadFrame"; // set target ke iframe tersembunyi 
-            form.submit();
+            setTimeout(() => {
+                const form = document.getElementById("FormCO-" + idcust);
+                form.target = "downloadFrame"; // set target ke iframe tersembunyi 
+                form.submit();
+
+            }, 1500);
 
             setTimeout(() => {
                 window.location.href = "/Home/Index";
-            }, 2000); // kasih jeda biar download sempat mulai
-        }, 1500);
+            }, 3000); // kasih jeda biar download sempat mulai
 
-        return false; // cegah submit default
-    }
+            return false; // cegah submit default
+        }
 
     </script>
 }

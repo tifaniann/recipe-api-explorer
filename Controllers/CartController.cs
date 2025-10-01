@@ -19,6 +19,7 @@ using iText.Kernel.Pdf.Extgstate;
 using TheMealDBApp.Models;
 using System.IO;
 using Microsoft.EntityFrameworkCore;
+using iText.Layout.Borders;
 
 namespace TheMealDBApp.Controllers
 {
@@ -147,7 +148,7 @@ namespace TheMealDBApp.Controllers
                     .Include(od => od.Order)
                     .ToListAsync();
 
-                var satuOrder = isi.FirstOrDefault();
+                var satuOrder = isi.OrderByDescending(od => od.Order.OrderDate).FirstOrDefault();
 
                 if (satuOrder != null)
                 {
@@ -159,7 +160,7 @@ namespace TheMealDBApp.Controllers
                     doc.Add(new Paragraph("\n"));
                     doc.Add(new Paragraph("Detail Order:"));
                     // Buat tabel dengan 4 kolom
-                    var table = new Table(4, true);
+                    var table = new Table(3, true);
                     table.AddHeaderCell("ID Category");
                     table.AddHeaderCell("Category");
                     table.AddHeaderCell("Quantity");
@@ -171,6 +172,7 @@ namespace TheMealDBApp.Controllers
                         table.AddCell(item.StrCategory ?? "");
                         table.AddCell(item.Jml.ToString());
                     }
+                    table.SetBorder(new SolidBorder(1));
                     doc.Add(table);
                 }
                 Console.WriteLine("isi count: " + isi.Count);

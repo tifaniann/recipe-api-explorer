@@ -20,6 +20,7 @@ public class HomeController : Controller
     public async Task<IActionResult> Index() // Home/Index.cshtml (nama action(fungsi) harus sama dengan nama file .cshtml dan nama folder harus sama dengan nama controller)
     {
         // return View(); // Views/{NamaController}/{NamaAction}.cshtml --> Views/Home/Index.cshtml
+        Console.WriteLine("DISINI");
         var response = await _httpClient.GetAsync("https://www.themealdb.com/api/json/v1/1/categories.php");
         if (response.IsSuccessStatusCode)
         {

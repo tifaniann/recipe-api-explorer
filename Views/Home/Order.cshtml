@@ -52,11 +52,11 @@
             }
         </tbody>
     </table>
+    <iframe id="downloadFrame" name= "downloadFrame" style="display:none;"></iframe> @* iframe agar menunggu sampai pdf terunduh  *@
     <form id="FormCO-@Context.Session.GetInt32("IdCust")" 
         asp-action="CheckoutPdf" 
         asp-controller="Cart" 
         method="post" 
-        target="_blank"
         onsubmit="return confirmAndOpenPdf('@Context.Session.GetInt32("IdCust")');"
         style="text-align:right; margin-top:10px;">
         <div style="text-align: right; margin-top:10px;">
@@ -92,9 +92,10 @@
         msg.style.display = "flex";
 
         setTimeout(() => {
-            document.getElementById("FormCO-" + idcust).submit();
+            const form = document.getElementById("FormCO-" + idcust);
+            form.target = "downloadFrame"; // set target ke iframe tersembunyi 
+            form.submit();
 
-            // lalu redirect halaman utama ke Index
             setTimeout(() => {
                 window.location.href = "/Home/Index";
             }, 2000); // kasih jeda biar download sempat mulai

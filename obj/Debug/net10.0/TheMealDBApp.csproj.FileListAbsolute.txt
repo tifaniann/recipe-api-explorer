@@ -250,3 +250,9 @@ C:\Users\Admin\Documents\PROGRAM TIFANI\TheMealDBApp\obj\Debug\net10.0\refint\Th
 C:\Users\Admin\Documents\PROGRAM TIFANI\TheMealDBApp\obj\Debug\net10.0\TheMealDBApp.pdb
 C:\Users\Admin\Documents\PROGRAM TIFANI\TheMealDBApp\obj\Debug\net10.0\TheMealDBApp.genruntimeconfig.cache
 C:\Users\Admin\Documents\PROGRAM TIFANI\TheMealDBApp\obj\Debug\net10.0\ref\TheMealDBApp.dll
+C:\Users\Admin\Documents\PROGRAM TIFANI\TheMealDBApp\bin\Debug\net10.0\publish\web.config
+C:\Users\Admin\Documents\PROGRAM TIFANI\TheMealDBApp\bin\Debug\net10.0\publish\appsettings.Development.json
+C:\Users\Admin\Documents\PROGRAM TIFANI\TheMealDBApp\bin\Debug\net10.0\publish\appsettings.json
+C:\Users\Admin\Documents\PROGRAM TIFANI\TheMealDBApp\bin\Debug\net10.0\publish\TheMealDBApp.deps.json
+C:\Users\Admin\Documents\PROGRAM TIFANI\TheMealDBApp\bin\Debug\net10.0\publish\TheMealDBApp.runtimeconfig.json
+C:\Users\Admin\Documents\PROGRAM TIFANI\TheMealDBApp\bin\Debug\net10.0\publish\TheMealDBApp.staticwebassets.endpoints.json

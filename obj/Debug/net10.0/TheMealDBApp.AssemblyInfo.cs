@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TheMealDBApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+20cb30d4b122d81d0d542bb19044813f9a68adbb")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b0b146cc169d6a708d876722cf041fc1d5cc16f3")]
 [assembly: System.Reflection.AssemblyProductAttribute("TheMealDBApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TheMealDBApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
